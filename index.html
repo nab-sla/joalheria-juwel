@@ -3,49 +3,251 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juwel Atelier | Alta Joalheria & Banhos Nobres</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
-    <title>Joias Juwel-Atelier</title>
   </head>
 
   <body>
-    <div class="pai">
-      <div class="card">
-        <h1 class="marca">Juwel Atelier</h1>
+    <!-- Barra superior -->
+    <div class="top-bar">
+      Peças exclusivas com banhos de alta qualidade • Envio para todo o Brasil
+    </div>
+
+    <!-- Cabeçalho minimalista -->
+    <header class="header">
+      <nav class="nav-links">
+        <a href="#sobre">O Atelier</a>
+        <a href="#categorias">Categorias</a>
+      </nav>
+
+      <a href="#" class="marca">JUWEL ATELIER</a>
+
+      <nav class="nav-links">
+        <a href="#destaques">Peças</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </header>
+
+    <!-- Banner Principal (Hero Section) -->
+    <section class="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <span class="subtitulo">JOALHERIA AUTORAL</span>
+        <h2>Arte, brilho e significado em cada detalhe</h2>
+        <a href="#destaques" class="btn-explorar">Ver Coleção</a>
       </div>
-      <div>
+    </section>
+
+    <!-- Seção Manifesto / Sobre -->
+    <section id="sobre" class="manifesto">
+      <div class="manifesto-container">
+        <span class="ornamento">✦</span>
         <p class="descricao">
-          somos uma joalheria com foco na fabricação de peças e aplicação de
+          “Somos uma joalheria com foco na fabricação de peças e aplicação de
           banhos de alta qualidade. Sempre em busca dos materiais e ideias que
-          expressem seu estilo, significado e personalidade.
+          expressem seu estilo, significado e personalidade.”
         </p>
       </div>
-    </div>
+    </section>
 
-        <section class="produtos">
-      <h2>nosso produtos</h2>
-
-      
-
-      <div class="conteiners">
-
-      <div class="topicos">
-        <h2>pingente</h2>
-        
+    <!-- Vitrine de Categorias -->
+    <section id="categorias" class="produtos">
+      <div class="section-header">
+        <span class="subtitulo-escuro">NAVEGUE POR ESTILO</span>
+        <h2>Nossas Categorias</h2>
       </div>
 
-      <div class="topicos">
-        <h2>colares</h2>
+      <div class="containers">
+        <a href="#destaques" class="topico-card">
+          <div class="img-wrapper">
+            <img
+              src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80"
+              alt="Pingentes Juwel Atelier"
+            />
+          </div>
+          <div class="topico-info">
+            <h3>Pingentes</h3>
+            <span>Explorar →</span>
+          </div>
+        </a>
+
+        <a href="#destaques" class="topico-card">
+          <div class="img-wrapper">
+            <img
+              src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80"
+              alt="Colares Juwel Atelier"
+            />
+          </div>
+          <div class="topico-info">
+            <h3>Colares</h3>
+            <span>Explorar →</span>
+          </div>
+        </a>
+
+        <a href="#destaques" class="topico-card">
+          <div class="img-wrapper">
+            <img
+              src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=600&q=80"
+              alt="Pulseiras Juwel Atelier"
+            />
+          </div>
+          <div class="topico-info">
+            <h3>Pulseiras</h3>
+            <span>Explorar →</span>
+          </div>
+        </a>
+
+        <a href="#destaques" class="topico-card">
+          <div class="img-wrapper">
+            <img
+              src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80"
+              alt="Anéis Juwel Atelier"
+            />
+          </div>
+          <div class="topico-info">
+            <h3>Anéis</h3>
+            <span>Explorar →</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Vitrine de Produtos com Preços e Botão de Compra -->
+    <section id="destaques" class="vitrine-vendas">
+      <div class="section-header">
+        <span class="subtitulo-escuro">SELEÇÃO EXCLUSIVA</span>
+        <h2>Destaques do Atelier</h2>
       </div>
 
-      <div class="topicos">
-        <h2>pulseiras</h2>
+      <div class="grid-produtos">
+        <!-- Produto 1 -->
+        <div class="produto-card">
+          <div class="produto-img">
+            <span class="tag-banho">Banho Ouro 18k</span>
+            <img
+              src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80"
+              alt="Colar Ponto de Luz"
+            />
+          </div>
+          <div class="produto-detalhes">
+            <h3>Colar Essência Luz</h3>
+            <p class="parcelas">ou 3x de R$ 63,00 sem juros</p>
+            <p class="preco">R$ 189,00</p>
+            <a
+              href="https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20comprar%20o%20Colar%20Essência%20Luz%20(R$%20189,00)."
+              target="_blank"
+              class="btn-comprar"
+            >
+              Comprar Agora
+            </a>
+          </div>
+        </div>
+
+        <!-- Produto 2 -->
+        <div class="produto-card">
+          <div class="produto-img">
+            <span class="tag-banho">Banho Ouro 18k</span>
+            <img
+              src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80"
+              alt="Anel Solitário"
+            />
+          </div>
+          <div class="produto-detalhes">
+            <h3>Anel Solitário Atelier</h3>
+            <p class="parcelas">ou 3x de R$ 53,00 sem juros</p>
+            <p class="preco">R$ 159,00</p>
+            <a
+              href="https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20comprar%20o%20Anel%20Solitário%20Atelier%20(R$%20159,00)."
+              target="_blank"
+              class="btn-comprar"
+            >
+              Comprar Agora
+            </a>
+          </div>
+        </div>
+
+        <!-- Produto 3 -->
+        <div class="produto-card">
+          <div class="produto-img">
+            <span class="tag-banho">Banho Ródio Branco</span>
+            <img
+              src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=600&q=80"
+              alt="Pulseira Elos"
+            />
+          </div>
+          <div class="produto-detalhes">
+            <h3>Pulseira Elo Imperial</h3>
+            <p class="parcelas">ou 3x de R$ 73,00 sem juros</p>
+            <p class="preco">R$ 219,00</p>
+            <a
+              href="https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20comprar%20a%20Pulseira%20Elo%20Imperial%20(R$%20219,00)."
+              target="_blank"
+              class="btn-comprar"
+            >
+              Comprar Agora
+            </a>
+          </div>
+        </div>
+
+        <!-- Produto 4 -->
+        <div class="produto-card">
+          <div class="produto-img">
+            <span class="tag-banho">Banho Ouro 18k</span>
+            <img
+              src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80"
+              alt="Pingente Medalha"
+            />
+          </div>
+          <div class="produto-detalhes">
+            <h3>Pingente Medalha Orgânica</h3>
+            <p class="parcelas">ou 3x de R$ 46,33 sem juros</p>
+            <p class="preco">R$ 139,00</p>
+            <a
+              href="https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20comprar%20o%20Pingente%20Medalha%20Orgânica%20(R$%20139,00)."
+              target="_blank"
+              class="btn-comprar"
+            >
+              Comprar Agora
+            </a>
+          </div>
+        </div>
       </div>
+    </section>
 
-      <div class="topicos">
-        <h2>aneis</h2>
+    <!-- Rodapé -->
+    <footer id="contato" class="footer">
+      <div class="footer-marca">JUWEL ATELIER</div>
+      <p>Fabricação própria & banhos nobres de alta durabilidade.</p>
+      <div class="footer-copy">
+        © 2026 Juwel Atelier. Todos os direitos reservados.
       </div>
+    </footer>
 
-    </div>
-
+    <!-- Botão Flutuante do WhatsApp -->
+    <a
+      href="https://wa.me/5511999999999?text=Olá!%20Vim%20pelo%20site%20da%20Juwel%20Atelier%20e%20gostaria%20de%20mais%20informações."
+      class="whatsapp-float"
+      target="_blank"
+      aria-label="Falar no WhatsApp"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 448 512"
+        width="28"
+        height="28"
+        fill="currentColor"
+      >
+        <path
+          d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"
+        />
+      </svg>
+    </a>
   </body>
 </html>
