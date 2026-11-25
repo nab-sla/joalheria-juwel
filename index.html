@@ -20,7 +20,7 @@
       Peças exclusivas com banhos de alta qualidade • Envio para todo o Brasil
     </div>
 
-    <!-- Cabeçalho minimalista -->
+    <!-- Cabeçalho minimalista com Sacola -->
     <header class="header">
       <nav class="nav-links">
         <a href="#sobre">O Atelier</a>
@@ -29,10 +29,15 @@
 
       <a href="#" class="marca">JUWEL ATELIER</a>
 
-      <nav class="nav-links">
-        <a href="#destaques">Peças</a>
-        <a href="#contato">Contato</a>
-      </nav>
+      <div class="header-right">
+        <nav class="nav-links">
+          <a href="#destaques">Peças</a>
+          <a href="#contato">Contato</a>
+        </nav>
+        <button class="btn-sacola" onclick="abrirCarrinho()" aria-label="Abrir Sacola">
+          Sacola (<span id="contador-sacola">0</span>)
+        </button>
+      </div>
     </header>
 
     <!-- Banner Principal (Hero Section) -->
@@ -93,10 +98,7 @@
 
         <a href="#destaques" class="topico-card">
           <div class="img-wrapper">
-            <img
-              src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=600&q=80"
-              alt="Pulseiras Juwel Atelier"
-            />
+            <img src="pulseira.jpeg" alt="Pulseiras Juwel Atelier" />
           </div>
           <div class="topico-info">
             <h3>Pulseiras</h3>
@@ -106,10 +108,7 @@
 
         <a href="#destaques" class="topico-card">
           <div class="img-wrapper">
-            <img
-              src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80"
-              alt="Anéis Juwel Atelier"
-            />
+            <img src="aneis.jpeg" alt="Anéis Juwel Atelier" />
           </div>
           <div class="topico-info">
             <h3>Anéis</h3>
@@ -119,7 +118,7 @@
       </div>
     </section>
 
-    <!-- Vitrine de Produtos com Preços e Botão de Compra -->
+    <!-- Vitrine de Produtos -->
     <section id="destaques" class="vitrine-vendas">
       <div class="section-header">
         <span class="subtitulo-escuro">SELEÇÃO EXCLUSIVA</span>
@@ -128,98 +127,184 @@
 
       <div class="grid-produtos">
         <!-- Produto 1 -->
-        <div class="produto-card">
+        <div class="produto-card" onclick="abrirProduto(0)">
           <div class="produto-img">
-            <span class="tag-banho">Banho Ouro 18k</span>
+            <span class="tag-banho">Promoção</span>
             <img
               src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80"
-              alt="Colar Ponto de Luz"
+              alt="Colar Essência Luz"
             />
           </div>
           <div class="produto-detalhes">
             <h3>Colar Essência Luz</h3>
-            <p class="parcelas">ou 3x de R$ 63,00 sem juros</p>
+            <p class="preco-antigo">R$ 249,00</p>
             <p class="preco">R$ 189,00</p>
-            <a
-              href="https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20comprar%20o%20Colar%20Essência%20Luz%20(R$%20189,00)."
-              target="_blank"
-              class="btn-comprar"
-            >
-              Comprar Agora
-            </a>
+            <button type="button" class="btn-comprar">Escolher Opções</button>
           </div>
         </div>
 
-        <!-- Produto 2 -->
-        <div class="produto-card">
+        <!-- Produto 2 (usando sua foto real aneis.jpeg) -->
+        <div class="produto-card" onclick="abrirProduto(1)">
           <div class="produto-img">
-            <span class="tag-banho">Banho Ouro 18k</span>
-            <img
-              src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80"
-              alt="Anel Solitário"
-            />
+            <span class="tag-banho">Promoção</span>
+            <img src="aneis.jpeg" alt="Anel Solitário Atelier" />
           </div>
           <div class="produto-detalhes">
             <h3>Anel Solitário Atelier</h3>
-            <p class="parcelas">ou 3x de R$ 53,00 sem juros</p>
+            <p class="preco-antigo">R$ 210,00</p>
             <p class="preco">R$ 159,00</p>
-            <a
-              href="https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20comprar%20o%20Anel%20Solitário%20Atelier%20(R$%20159,00)."
-              target="_blank"
-              class="btn-comprar"
-            >
-              Comprar Agora
-            </a>
+            <button type="button" class="btn-comprar">Escolher Opções</button>
           </div>
         </div>
 
-        <!-- Produto 3 -->
-        <div class="produto-card">
+        <!-- Produto 3 (usando sua foto real pulseira.jpeg) -->
+        <div class="produto-card" onclick="abrirProduto(2)">
           <div class="produto-img">
-            <span class="tag-banho">Banho Ródio Branco</span>
-            <img
-              src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=600&q=80"
-              alt="Pulseira Elos"
-            />
+            <span class="tag-banho">Promoção</span>
+            <img src="pulseira.jpeg" alt="Pulseira Elo Imperial" />
           </div>
           <div class="produto-detalhes">
             <h3>Pulseira Elo Imperial</h3>
-            <p class="parcelas">ou 3x de R$ 73,00 sem juros</p>
+            <p class="preco-antigo">R$ 279,00</p>
             <p class="preco">R$ 219,00</p>
-            <a
-              href="https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20comprar%20a%20Pulseira%20Elo%20Imperial%20(R$%20219,00)."
-              target="_blank"
-              class="btn-comprar"
-            >
-              Comprar Agora
-            </a>
+            <button type="button" class="btn-comprar">Escolher Opções</button>
           </div>
         </div>
 
         <!-- Produto 4 -->
-        <div class="produto-card">
+        <div class="produto-card" onclick="abrirProduto(3)">
           <div class="produto-img">
-            <span class="tag-banho">Banho Ouro 18k</span>
+            <span class="tag-banho">Promoção</span>
             <img
               src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80"
-              alt="Pingente Medalha"
+              alt="Pingente Medalha Orgânica"
             />
           </div>
           <div class="produto-detalhes">
             <h3>Pingente Medalha Orgânica</h3>
-            <p class="parcelas">ou 3x de R$ 46,33 sem juros</p>
+            <p class="preco-antigo">R$ 189,00</p>
             <p class="preco">R$ 139,00</p>
-            <a
-              href="https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20comprar%20o%20Pingente%20Medalha%20Orgânica%20(R$%20139,00)."
-              target="_blank"
-              class="btn-comprar"
-            >
-              Comprar Agora
-            </a>
+            <button type="button" class="btn-comprar">Escolher Opções</button>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- MODAL DE DETALHES DO PRODUTO (Estilo página de venda Graseffe) -->
+    <div id="modal-produto" class="modal-backdrop" onclick="fecharModalFora(event)">
+      <div class="modal-box">
+        <button class="modal-fechar" onclick="fecharModal()" aria-label="Fechar">✕</button>
+
+        <div class="modal-grid">
+          <!-- Coluna Esquerda: Foto Grande -->
+          <div class="modal-foto">
+            <img id="modal-img" src="" alt="Foto da Joia" />
+          </div>
+
+          <!-- Coluna Direita: Informações e Compra -->
+          <div class="modal-info">
+            <span class="modal-marca">JUWEL ATELIER</span>
+            <h2 id="modal-titulo">Nome da Joia</h2>
+
+            <div class="modal-precos">
+              <span id="modal-preco-antigo" class="modal-preco-riscado">R$ 249,00</span>
+              <span id="modal-preco-atual" class="modal-preco-destaque">R$ 189,00</span>
+              <span class="badge-promocao">Promoção</span>
+            </div>
+
+            <!-- Seletor de Banho / Cor -->
+            <div class="seletor-grupo">
+              <label>Banho: <strong id="banho-selecionado">Ouro 18k</strong></label>
+              <div class="opcoes-cores" id="lista-banhos">
+                <button
+                  type="button"
+                  class="cor-bolinha ativo"
+                  style="background-color: #d4af37"
+                  data-nome="Ouro 18k"
+                  onclick="selecionarBanho(this)"
+                  title="Ouro 18k"
+                ></button>
+                <button
+                  type="button"
+                  class="cor-bolinha"
+                  style="background-color: #dcdcdc"
+                  data-nome="Ródio Branco"
+                  onclick="selecionarBanho(this)"
+                  title="Ródio Branco"
+                ></button>
+                <button
+                  type="button"
+                  class="cor-bolinha"
+                  style="background-color: #e0a99a"
+                  data-nome="Ouro Rosé"
+                  onclick="selecionarBanho(this)"
+                  title="Ouro Rosé"
+                ></button>
+              </div>
+            </div>
+
+            <!-- Seletor de Tamanho / Aro -->
+            <div class="seletor-grupo">
+              <label id="label-tamanho">Tamanho</label>
+              <div class="opcoes-tamanhos" id="lista-tamanhos">
+                <!-- Preenchido via JS conforme a peça -->
+              </div>
+            </div>
+
+            <!-- Quantidade -->
+            <div class="seletor-grupo">
+              <label>Quantidade</label>
+              <div class="controle-qtd">
+                <button type="button" onclick="alterarQtd(-1)">−</button>
+                <span id="modal-qtd">1</span>
+                <button type="button" onclick="alterarQtd(1)">+</button>
+              </div>
+            </div>
+
+            <!-- Botões de Ação -->
+            <div class="modal-acoes">
+              <button type="button" class="btn-outline" onclick="adicionarAoCarrinho()">
+                Adicionar ao carrinho
+              </button>
+              <button type="button" class="btn-solido" onclick="comprarAgoraWhatsApp()">
+                Compre já
+              </button>
+            </div>
+
+            <!-- Texto editorial inferior -->
+            <div class="modal-descricao-extra">
+              <h3 id="modal-subtitulo-desc">Brilho duradouro e acabamento artesanal</h3>
+              <p id="modal-texto-desc">
+                Peça produzida com rigoroso controle de qualidade e camada nobre de banho hipoalergênico, garantindo conforto e sofisticação para o uso diário ou ocasiões especiais.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GAVETA LATERAL DO CARRINHO -->
+    <div id="carrinho-backdrop" class="carrinho-backdrop" onclick="fecharCarrinho()"></div>
+    <aside id="carrinho-drawer" class="carrinho-drawer">
+      <div class="carrinho-header">
+        <h3>Sua Sacola</h3>
+        <button onclick="fecharCarrinho()">✕</button>
+      </div>
+
+      <div id="carrinho-itens" class="carrinho-itens">
+        <p class="carrinho-vazio">Sua sacola está vazia.</p>
+      </div>
+
+      <div class="carrinho-footer">
+        <div class="carrinho-total">
+          <span>Total estimado</span>
+          <strong id="carrinho-valor-total">R$ 0,00</strong>
+        </div>
+        <button type="button" class="btn-solido" onclick="finalizarCarrinhoWhatsApp()">
+          Finalizar Pedido no WhatsApp
+        </button>
+      </div>
+    </aside>
 
     <!-- Rodapé -->
     <footer id="contato" class="footer">
@@ -249,5 +334,248 @@
         />
       </svg>
     </a>
+
+    <!-- Script de Interação da Loja -->
+    <script>
+      // COLOQUE SEU NÚMERO DE WHATSAPP AQUI (55 + DDD + Número)
+      const TELEFONE_WHATSAPP = "5511999999999";
+
+      const produtos = [
+        {
+          nome: "Colar Essência Luz | Elegância e brilho atemporal",
+          precoAntigo: "R$ 249,00",
+          precoAtual: 189.0,
+          imagem:
+            "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
+          labelTamanho: "Comprimento da Corrente",
+          tamanhos: ["40cm", "45cm", "50cm", "60cm"],
+          subtitulo: "Colar Essência Luz — Delicadeza que ilumina",
+          descricao:
+            "Corrente veneziana fina com ponto de luz cravejado. Recebe banho nobre de alta camada com verniz protetor hipoalergênico."
+        },
+        {
+          nome: "Anel Solitário Atelier | Acabamento de alta joalheria",
+          precoAntigo: "R$ 210,00",
+          precoAtual: 159.0,
+          imagem: "aneis.jpeg",
+          labelTamanho: "Numeração do Aro",
+          tamanhos: ["14", "16", "18", "20", "22"],
+          subtitulo: "Anel Solitário Atelier — Presença marcante",
+          descricao:
+            "Design clássico com cravação manual e polimento espelhado. Desenvolvido para manter o brilho intenso mesmo no uso diário."
+        },
+        {
+          nome: "Pulseira Elo Imperial | Sofisticação em cada elo",
+          precoAntigo: "R$ 279,00",
+          precoAtual: 219.0,
+          imagem: "pulseira.jpeg",
+          labelTamanho: "Tamanho",
+          tamanhos: ["17cm", "19cm", "21cm"],
+          subtitulo: "Pulseira Elo Imperial — Leveza e resistência",
+          descricao:
+            "Elos articulados com fecho seguro e extensor ajustável. Ideal para usar sozinha ou em composições."
+        },
+        {
+          nome: "Pingente Medalha Orgânica | Design exclusivo",
+          precoAntigo: "R$ 189,00",
+          precoAtual: 139.0,
+          imagem:
+            "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80",
+          labelTamanho: "Tamanho da Medalha",
+          tamanhos: ["Pequena (15mm)", "Média (20mm)"],
+          subtitulo: "Pingente Medalha Orgânica — Arte e significado",
+          descricao:
+            "Textura orgânica feita à mão no ateliê com banho de alta durabilidade e acabamento acetinado."
+        }
+      ];
+
+      let produtoAtual = produtos[0];
+      let banhoAtual = "Ouro 18k";
+      let tamanhoAtual = "";
+      let quantidadeAtual = 1;
+      let carrinho = [];
+
+      function formatarMoeda(valor) {
+        return valor.toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL"
+        });
+      }
+
+      function abrirProduto(indice) {
+        produtoAtual = produtos[indice];
+        quantidadeAtual = 1;
+        banhoAtual = "Ouro 18k";
+
+        document.getElementById("modal-img").src = produtoAtual.imagem;
+        document.getElementById("modal-titulo").textContent = produtoAtual.nome;
+        document.getElementById("modal-preco-antigo").textContent =
+          produtoAtual.precoAntigo;
+        document.getElementById("modal-preco-atual").textContent =
+          formatarMoeda(produtoAtual.precoAtual);
+        document.getElementById("modal-qtd").textContent = quantidadeAtual;
+        document.getElementById("modal-subtitulo-desc").textContent =
+          produtoAtual.subtitulo;
+        document.getElementById("modal-texto-desc").textContent =
+          produtoAtual.descricao;
+
+        // Reseta seleção de banho
+        document.getElementById("banho-selecionado").textContent = banhoAtual;
+        document.querySelectorAll(".cor-bolinha").forEach((b, i) => {
+          b.classList.toggle("ativo", i === 0);
+        });
+
+        // Monta opções de tamanho
+        document.getElementById("label-tamanho").textContent =
+          produtoAtual.labelTamanho;
+        const containerTamanhos = document.getElementById("lista-tamanhos");
+        containerTamanhos.innerHTML = "";
+
+        produtoAtual.tamanhos.forEach((tam, idx) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "pilula-tamanho" + (idx === 0 ? " ativo" : "");
+          btn.textContent = tam;
+          btn.onclick = () => selecionarTamanho(btn, tam);
+          containerTamanhos.appendChild(btn);
+        });
+        tamanhoAtual = produtoAtual.tamanhos[0];
+
+        document.getElementById("modal-produto").classList.add("aberto");
+        document.body.style.overflow = "hidden";
+      }
+
+      function fecharModal() {
+        document.getElementById("modal-produto").classList.remove("aberto");
+        document.body.style.overflow = "";
+      }
+
+      function fecharModalFora(e) {
+        if (e.target.id === "modal-produto") {
+          fecharModal();
+        }
+      }
+
+      function selecionarBanho(botao) {
+        document
+          .querySelectorAll(".cor-bolinha")
+          .forEach((b) => b.classList.remove("ativo"));
+        botao.classList.add("ativo");
+        banhoAtual = botao.dataset.nome;
+        document.getElementById("banho-selecionado").textContent = banhoAtual;
+      }
+
+      function selecionarTamanho(botao, valor) {
+        document
+          .querySelectorAll(".pilula-tamanho")
+          .forEach((b) => b.classList.remove("ativo"));
+        botao.classList.add("ativo");
+        tamanhoAtual = valor;
+      }
+
+      function alterarQtd(delta) {
+        quantidadeAtual = Math.max(1, quantidadeAtual + delta);
+        document.getElementById("modal-qtd").textContent = quantidadeAtual;
+      }
+
+      function comprarAgoraWhatsApp() {
+        const total = formatarMoeda(produtoAtual.precoAtual * quantidadeAtual);
+        const texto =
+          `Olá, Juwel Atelier! Gostaria de comprar:\n\n` +
+          `• *Peça:* ${produtoAtual.nome}\n` +
+          `• *Banho:* ${banhoAtual}\n` +
+          `• *Tamanho:* ${tamanhoAtual}\n` +
+          `• *Quantidade:* ${quantidadeAtual}\n` +
+          `• *Total:* ${total}`;
+
+        const url = `https://wa.me/${TELEFONE_WHATSAPP}?text=${encodeURIComponent(texto)}`;
+        window.open(url, "_blank");
+      }
+
+      function adicionarAoCarrinho() {
+        carrinho.push({
+          nome: produtoAtual.nome.split("|")[0].trim(),
+          banho: banhoAtual,
+          tamanho: tamanhoAtual,
+          quantidade: quantidadeAtual,
+          precoUnitario: produtoAtual.precoAtual,
+          imagem: produtoAtual.imagem
+        });
+
+        atualizarCarrinhoUI();
+        fecharModal();
+        abrirCarrinho();
+      }
+
+      function removerDoCarrinho(index) {
+        carrinho.splice(index, 1);
+        atualizarCarrinhoUI();
+      }
+
+      function atualizarCarrinhoUI() {
+        const lista = document.getElementById("carrinho-itens");
+        const contador = document.getElementById("contador-sacola");
+        const totalEl = document.getElementById("carrinho-valor-total");
+
+        const totalItens = carrinho.reduce((acc, item) => acc + item.quantidade, 0);
+        contador.textContent = totalItens;
+
+        if (carrinho.length === 0) {
+          lista.innerHTML = '<p class="carrinho-vazio">Sua sacola está vazia.</p>';
+          totalEl.textContent = "R$ 0,00";
+          return;
+        }
+
+        let soma = 0;
+        lista.innerHTML = "";
+
+        carrinho.forEach((item, idx) => {
+          const subtotal = item.precoUnitario * item.quantidade;
+          soma += subtotal;
+
+          lista.innerHTML += `
+            <div class="item-sacola">
+              <img src="${item.imagem}" alt="${item.nome}" />
+              <div class="item-sacola-info">
+                <h4>${item.nome}</h4>
+                <p>Banho: ${item.banho} • Tam: ${item.tamanho}</p>
+                <p>${item.quantidade}x ${formatarMoeda(item.precoUnitario)}</p>
+              </div>
+              <button class="remover-item" onclick="removerDoCarrinho(${idx})">Remover</button>
+            </div>
+          `;
+        });
+
+        totalEl.textContent = formatarMoeda(soma);
+      }
+
+      function abrirCarrinho() {
+        document.getElementById("carrinho-drawer").classList.add("aberto");
+        document.getElementById("carrinho-backdrop").classList.add("aberto");
+      }
+
+      function fecharCarrinho() {
+        document.getElementById("carrinho-drawer").classList.remove("aberto");
+        document.getElementById("carrinho-backdrop").classList.remove("aberto");
+      }
+
+      function finalizarCarrinhoWhatsApp() {
+        if (carrinho.length === 0) return;
+
+        let texto = `Olá, Juwel Atelier! Gostaria de finalizar meu pedido:\n\n`;
+        let soma = 0;
+
+        carrinho.forEach((item, i) => {
+          const sub = item.precoUnitario * item.quantidade;
+          soma += sub;
+          texto += `${i + 1}. *${item.nome}* (${item.banho}, Tam: ${item.tamanho}) — ${item.quantidade}x = ${formatarMoeda(sub)}\n`;
+        });
+
+        texto += `\n*Total do Pedido:* ${formatarMoeda(soma)}`;
+
+        const url = `https://wa.me/${TELEFONE_WHATSAPP}?text=${encodeURIComponent(texto)}`;
+        window.open(url, "_blank");
+      }
+    </script>
   </body>
 </html>
