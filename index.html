@@ -44,15 +44,6 @@
         display: block;
       }
 
-      /* Fallback para itens que ainda usam a grade imagens/catalogo.jpg */
-      .sprite-joia {
-        width: 100%;
-        height: 100%;
-        background-image: url("imagens/catalogo.jpg");
-        background-size: 900% 800%;
-        background-repeat: no-repeat;
-      }
-
       /* Setas laterais do carrossel */
       .seta-carrossel {
         position: absolute;
@@ -225,7 +216,10 @@
       <div class="containers">
         <a href="#destaques" class="topico-card" onclick="selecionarCategoria('Pingente')">
           <div class="img-wrapper">
-            <div class="sprite-joia" style="background-position: 0% 0%;"></div>
+            <img
+              src="https://i.etsystatic.com/7254055/r/il/62ff7a/6595410931/il_fullxfull.6595410931_iuzb.jpg"
+              alt="Pingentes Juwel Atelier"
+            />
           </div>
           <div class="topico-info">
             <h3>Pingentes</h3>
@@ -235,7 +229,10 @@
 
         <a href="#destaques" class="topico-card" onclick="selecionarCategoria('Colar')">
           <div class="img-wrapper">
-            <div class="sprite-joia" style="background-position: 37.5% 28.57%;"></div>
+            <img
+              src="https://estele.co/cdn/shop/files/7307NKER_4dafbe9f-6438-4004-b7ef-c45d14c2df5e.png?v=1773389761&width=1000"
+              alt="Colares Juwel Atelier"
+            />
           </div>
           <div class="topico-info">
             <h3>Colares</h3>
@@ -245,7 +242,10 @@
 
         <a href="#destaques" class="topico-card" onclick="selecionarCategoria('Pulseira')">
           <div class="img-wrapper">
-            <img src="imagens/pulseira-imperial-ouro.jpg" alt="Pulseiras Juwel Atelier" />
+            <img
+              src="https://media.stories.com/assets/005/ec/eb/ecebf9b7a287e20331e721b12147ad696c9e1385_xxl-1.jpg?imwidth=2560"
+              alt="Pulseiras Juwel Atelier"
+            />
           </div>
           <div class="topico-info">
             <h3>Pulseiras</h3>
@@ -255,7 +255,10 @@
 
         <a href="#destaques" class="topico-card" onclick="selecionarCategoria('Anel')">
           <div class="img-wrapper">
-            <img src="imagens/aneis.jpeg" alt="Anéis Juwel Atelier" />
+            <img
+              src="https://media.masonry.so/t/blog/ai-jewelry-product-photography/seedream45.png?w=1024"
+              alt="Anéis Juwel Atelier"
+            />
           </div>
           <div class="topico-info">
             <h3>Anéis</h3>
@@ -447,15 +450,10 @@
     </a>
 
     <script>
-      // COLOQUE SEU NÚMERO DE WHATSAPP AQUI (55 + DDD + Número)
       const TELEFONE_WHATSAPP = "5511999999999";
       const BANHOS_ORDEM = ["Ouro 18k", "Ródio Branco", "Ouro Rosé"];
-
-      function pos(col, row) {
-        const x = (col / 8) * 100;
-        const y = (row / 7) * 100;
-        return `${x.toFixed(2)}% ${y.toFixed(2)}%`;
-      }
+      const IMAGEM_FALLBACK =
+        "https://media.stories.com/assets/005/ec/eb/ecebf9b7a287e20331e721b12147ad696c9e1385_xxl-1.jpg?imwidth=2560";
 
       const produtos = [
         // ================= PINGENTES (6 ITENS) =================
@@ -466,7 +464,11 @@
           categoria: "Pingente",
           precoAntigo: "R$ 189,00",
           precoAtual: 139.0,
-          posicoes: { "Ouro 18k": pos(0, 0), "Ródio Branco": pos(1, 0), "Ouro Rosé": pos(2, 0) },
+          imagens: {
+            "Ouro 18k": "https://i.etsystatic.com/7254055/r/il/62ff7a/6595410931/il_fullxfull.6595410931_iuzb.jpg",
+            "Ródio Branco": "https://sorrelsky.com/cdn/shop/products/toby-pomeroy-sorrel-sky-gallery-jewelry-oasis-25mm-medallion-pendant-2.jpg?v=1679440236&width=1220",
+            "Ouro Rosé": "http://shopunderthewillowtree.ca/cdn/shop/files/VintageRoseMedallionNecklaceEmeryandOpal.png?v=1689891207"
+          },
           labelTamanho: "Tamanho",
           tamanhos: ["Pequeno (15mm)", "Médio (20mm)"],
           subtitulo: "Pingente Medalha Orgânica — Brilho acetinado",
@@ -479,7 +481,11 @@
           categoria: "Pingente",
           precoAntigo: "R$ 229,00",
           precoAtual: 169.0,
-          posicoes: { "Ouro 18k": pos(0, 1), "Ródio Branco": pos(1, 1), "Ouro Rosé": pos(2, 1) },
+          imagens: {
+            "Ouro 18k": "https://www.lilyblanche.com/cdn/shop/files/gold_2_photo_heart_locket12curb_1080_copy2.jpg?v=1741886233",
+            "Ródio Branco": "https://i.etsystatic.com/5636111/r/il/b1b3d6/5175666274/il_fullxfull.5175666274_n6er.jpg",
+            "Ouro Rosé": "https://thelockettree.co.uk/cdn/shop/files/VTC_model.jpg?v=1722435759&width=3600"
+          },
           labelTamanho: "Tamanho",
           tamanhos: ["18mm", "24mm"],
           subtitulo: "Pingente Relicário Coração — Afeto em forma de joia",
@@ -492,7 +498,11 @@
           categoria: "Pingente",
           precoAntigo: "R$ 179,00",
           precoAtual: 129.0,
-          posicoes: { "Ouro 18k": pos(3, 1), "Ródio Branco": pos(4, 1), "Ouro Rosé": pos(5, 1) },
+          imagens: {
+            "Ouro 18k": "https://www.blueruby.com/cdn/shop/files/teardrop-crystal-necklace-la-vie-parisienne-necklaces-14k-gold-plated-shade-crystal-blue-ruby-jewellery-165136-2.jpg?v=1698713026",
+            "Ródio Branco": "https://www.laceandfavour.com/_cache/_products_main/1000x1000/ellie-silver-teardrop-crystal-pendant-10454.jpg",
+            "Ouro Rosé": "https://poetrydesigns.com/cdn/shop/products/2022-11-0311.03.23.jpg?v=1677187506&width=1946"
+          },
           labelTamanho: "Tamanho",
           tamanhos: ["12mm", "16mm"],
           subtitulo: "Pingente Gota Cristal — Ponto de luz sofisticado",
@@ -505,7 +515,11 @@
           categoria: "Pingente",
           precoAntigo: "R$ 199,00",
           precoAtual: 149.0,
-          posicoes: { "Ouro 18k": pos(0, 3), "Ródio Branco": pos(1, 2), "Ouro Rosé": pos(2, 3) },
+          imagens: {
+            "Ouro 18k": "https://i.etsystatic.com/9944105/r/il/742602/7522396945/il_fullxfull.7522396945_5rnl.jpg",
+            "Ródio Branco": "https://www.tweov.com/cdn/shop/files/0J8A5856.webp?v=1770158483",
+            "Ouro Rosé": "https://i.etsystatic.com/9944105/r/il/c99c7e/7522396949/il_570xN.7522396949_rxq2.jpg"
+          },
           labelTamanho: "Tamanho",
           tamanhos: ["18mm", "22mm"],
           subtitulo: "Pingente Sol Radiante — Raios esculpidos em relevo",
@@ -518,7 +532,11 @@
           categoria: "Pingente",
           precoAntigo: "R$ 185,00",
           precoAtual: 135.0,
-          posicoes: { "Ouro 18k": pos(0, 4), "Ródio Branco": pos(1, 4), "Ouro Rosé": pos(3, 3) },
+          imagens: {
+            "Ouro 18k": "https://alexandercastle.com/cdn/shop/files/64_Lifestyle_1024x.png?v=1773322563",
+            "Ródio Branco": "https://swansoninc.com/wp-content/uploads/Untitled-design-12-1.jpg",
+            "Ouro Rosé": "https://i.etsystatic.com/17065121/r/il/7eaec6/8299899700/il_570xN.8299899700_oiti.jpg"
+          },
           labelTamanho: "Tamanho",
           tamanhos: ["20mm", "28mm"],
           subtitulo: "Pingente Cruz Clássica — Linhas limpas e atemporais",
@@ -531,7 +549,11 @@
           categoria: "Pingente",
           precoAntigo: "R$ 215,00",
           precoAtual: 159.0,
-          posicoes: { "Ouro 18k": pos(0, 5), "Ródio Branco": pos(1, 5), "Ouro Rosé": pos(2, 5) },
+          imagens: {
+            "Ouro 18k": "https://gldn.com/cdn/shop/files/baroque-pearl-necklace-gldn-2.jpg?v=1687806068&width=3840",
+            "Ródio Branco": "https://www.ornatejewels.com/cdn/shop/files/RJP07814_1.jpg?v=1780047474&width=900",
+            "Ouro Rosé": "https://www.baroquejewellery.com/wp-content/uploads/2024/06/18RG-end-set-baroque-pearl-EXPORT-1-800x800.jpg"
+          },
           labelTamanho: "Tamanho",
           tamanhos: ["Único (16mm)"],
           subtitulo: "Pingente Pérola Barroca — Cada peça com formato exclusivo",
@@ -546,7 +568,11 @@
           categoria: "Colar",
           precoAntigo: "R$ 249,00",
           precoAtual: 189.0,
-          posicoes: { "Ouro 18k": pos(3, 4), "Ródio Branco": pos(4, 3), "Ouro Rosé": pos(5, 5) },
+          imagens: {
+            "Ouro 18k": "https://estele.co/cdn/shop/files/7307NKER_4dafbe9f-6438-4004-b7ef-c45d14c2df5e.png?v=1773389761&width=1000",
+            "Ródio Branco": "https://cdn.eternz.com/thumbnails/products/image_0_fb11f730_thumbnail_1024.jpg",
+            "Ouro Rosé": "http://www.danielwellington.com/cdn/shop/files/mdinrtavk2vgnnhy6fwo.png?v=1769605631"
+          },
           labelTamanho: "Comprimento",
           tamanhos: ["40cm", "45cm", "50cm"],
           subtitulo: "Colar Essência Luz — Delicadeza para todos os dias",
@@ -559,7 +585,11 @@
           categoria: "Colar",
           precoAntigo: "R$ 269,00",
           precoAtual: 199.0,
-          posicoes: { "Ouro 18k": pos(3, 5), "Ródio Branco": pos(4, 4), "Ouro Rosé": pos(4, 5) },
+          imagens: {
+            "Ouro 18k": "https://i.etsystatic.com/14924040/r/il/d816a5/5277279639/il_570xN.5277279639_5egg.jpg",
+            "Ródio Branco": "https://i.etsystatic.com/41321117/r/il/05d50a/4739310789/il_570xN.4739310789_i7i2.jpg",
+            "Ouro Rosé": "https://i.etsystatic.com/13655435/r/il/7c9d48/1048687590/il_570xN.1048687590_lhgr.jpg"
+          },
           labelTamanho: "Comprimento",
           tamanhos: ["45cm", "50cm"],
           subtitulo: "Colar Gravatinha Pérola — Valoriza o colo com sutileza",
@@ -572,7 +602,11 @@
           categoria: "Colar",
           precoAntigo: "R$ 299,00",
           precoAtual: 229.0,
-          posicoes: { "Ouro 18k": pos(3, 4), "Ródio Branco": pos(4, 2), "Ouro Rosé": pos(5, 2) },
+          imagens: {
+            "Ouro 18k": "http://pachchigarjewellers.com/cdn/shop/files/22K_Gold_Textured_Fancy_Link_Chain.jpg?v=1778579539",
+            "Ródio Branco": "https://cdn.itshot.com/product/h/e/heavy-sterling-silver-miami-cuban-link-chain-necklace-22-40in-11mm_350050_main.jpg?w=1",
+            "Ouro Rosé": "https://traxnyc.com/cdn/shop/files/2-6.4_1.jpg?v=1763849335&width=800"
+          },
           labelTamanho: "Comprimento",
           tamanhos: ["45cm", "50cm", "60cm"],
           subtitulo: "Colar Elo Português — Estrutura firme e polimento espelhado",
@@ -585,7 +619,11 @@
           categoria: "Colar",
           precoAntigo: "R$ 319,00",
           precoAtual: 245.0,
-          posicoes: { "Ouro 18k": pos(5, 3), "Ródio Branco": pos(4, 2), "Ouro Rosé": pos(5, 2) },
+          imagens: {
+            "Ouro 18k": "https://jluxlabel.com/cdn/shop/files/PRODUCT-JUL152026-JULYDROP1-27.jpg?v=1784842358&width=4000",
+            "Ródio Branco": "https://touch925.com/cdn/shop/files/EMNC2283_2.jpg?v=1774869981&width=2000",
+            "Ouro Rosé": "https://cdn.eternz.com/thumbnails/products/image_1_6ec87017_thumbnail_1024.jpg"
+          },
           labelTamanho: "Comprimento",
           tamanhos: ["40cm / 45cm", "45cm / 50cm"],
           subtitulo: "Colar Duplo Constelação — Mix pronto sem embaraçar",
@@ -598,7 +636,11 @@
           categoria: "Colar",
           precoAntigo: "R$ 289,00",
           precoAtual: 219.0,
-          posicoes: { "Ouro 18k": pos(3, 6), "Ródio Branco": pos(4, 3), "Ouro Rosé": pos(3, 7) },
+          imagens: {
+            "Ouro 18k": "https://www.tigerlily-jewellery.co.uk/wp-content/uploads/2024/06/Gold-and-mother-of-pearl-four-leaf-clover-necklace-II_1800.jpg",
+            "Ródio Branco": "https://www.topjewellery.co.uk/wp-content/uploads/2025/10/g3416_ah.jpg",
+            "Ouro Rosé": "https://cdn.eternz.com/thumbnails/products/img_9996_a5f900db_thumbnail_1024.jpg"
+          },
           labelTamanho: "Comprimento",
           tamanhos: ["40cm + 5cm ext.", "45cm + 5cm ext."],
           subtitulo: "Colar Trevo Madrepérola — Detalhes em madrepérola natural",
@@ -611,14 +653,18 @@
           categoria: "Colar",
           precoAntigo: "R$ 279,00",
           precoAtual: 209.0,
-          posicoes: { "Ouro 18k": pos(5, 3), "Ródio Branco": pos(4, 3), "Ouro Rosé": pos(5, 5) },
+          imagens: {
+            "Ouro 18k": "https://i.etsystatic.com/19853441/r/il/031fb5/2369512813/il_570xN.2369512813_g5bj.jpg",
+            "Ródio Branco": "https://i.etsystatic.com/25338644/r/il/e610fd/3675066522/il_fullxfull.3675066522_dp48.jpg",
+            "Ouro Rosé": "https://www.effyjewelry.com/cdn/shop/products/Effy-Jewelry-YCPAL57DD6_378b962e-b405-452b-8f60-4085adcec965.jpg?v=1551977936&width=1200"
+          },
           labelTamanho: "Comprimento",
           tamanhos: ["45cm", "50cm"],
           subtitulo: "Colar Medalhas Duplas — Plaquinhas gravadas com textura sutil",
           descricao: "Corrente resistente com medalhas finas de acabamento acetinado."
         },
 
-        // ================= PULSEIRAS (6 ITENS — COM FOTOS HD INDIVIDUAIS NOS 2 PRIMEIROS!) =================
+        // ================= PULSEIRAS (6 ITENS) =================
         {
           id: 13,
           tituloCurto: "Pulseira Elo Imperial",
@@ -627,9 +673,9 @@
           precoAntigo: "R$ 279,00",
           precoAtual: 219.0,
           imagens: {
-            "Ouro 18k": "imagens/pulseira-imperial-ouro.jpg",
-            "Ródio Branco": "imagens/pulseira-imperial-rodio.jpg",
-            "Ouro Rosé": "imagens/pulseira-imperial-rose.jpg"
+            "Ouro 18k": "https://media.stories.com/assets/005/ec/eb/ecebf9b7a287e20331e721b12147ad696c9e1385_xxl-1.jpg?imwidth=2560",
+            "Ródio Branco": "http://www.diamondcellar.com/cdn/shop/products/sculpted-cable-contour-bracelet-in-sterling-silver-562989.jpg?v=1673681329",
+            "Ouro Rosé": "https://rubans.in/cdn/shop/files/rubans-rose-gold-plated-chain-link-open-cuff-bracelet-modern-statement-jewelry-bracelet-1177302861_1800x1800.jpg?v=1765520398"
           },
           labelTamanho: "Tamanho",
           tamanhos: ["17cm", "19cm", "21cm"],
@@ -644,9 +690,9 @@
           precoAntigo: "R$ 349,00",
           precoAtual: 279.0,
           imagens: {
-            "Ouro 18k": "imagens/pulseira-riviera-ouro.jpg",
-            "Ródio Branco": "imagens/pulseira-riviera-rodio.jpg",
-            "Ouro Rosé": "imagens/pulseira-riviera-rose.jpg"
+            "Ouro 18k": "https://cdn.lisaangel.co.uk/image/cache/data/product-images/aw24/gr/gold-stainless-steel-mixed-sized-pearl-chain-bracelet-4x3a2039-copy-515x515.jpeg",
+            "Ródio Branco": "https://cdn.lisaangel.co.uk/image/cache/data/product-images/ss22/su-ss22/bracelets/freshwater-pearls-silver-chain-bracelet-443a0026copy-900x900.jpeg",
+            "Ouro Rosé": "https://cdn.lisaangel.co.uk/image/cache/data/product-images/ss22/su-ss22/bracelets/model-shots/freshwater-pearl-rose-gold-chain-bracelet-4x3a9008-900x900.jpeg"
           },
           labelTamanho: "Tamanho",
           tamanhos: ["17cm", "18cm", "19cm"],
@@ -660,7 +706,11 @@
           categoria: "Pulseira",
           precoAntigo: "R$ 329,00",
           precoAtual: 259.0,
-          posicoes: { "Ouro 18k": pos(6, 3), "Ródio Branco": pos(1, 6), "Ouro Rosé": pos(2, 6) },
+          imagens: {
+            "Ouro 18k": "https://res.cloudinary.com/wolfandbadger/image/upload/f_auto,q_auto:best,c_pad,b_white,h_800,w_800/products/organic-gold-wire-statement-cuff-bracelet__af574a0d41f9ee659bc92ebbcfddf56e",
+            "Ródio Branco": "http://www.hersey.co.uk/cdn/shop/files/Droplet-cuff-bracelet-silver.jpg?v=1776776425",
+            "Ouro Rosé": "https://i.ebayimg.com/images/g/ceEAAOSwbfBoFkEf/s-l1200.jpg"
+          },
           labelTamanho: "Tamanho",
           tamanhos: ["P (58mm)", "M (62mm)"],
           subtitulo: "Bracelete Rígido Orgânico — Design anatômico",
@@ -673,7 +723,11 @@
           categoria: "Pulseira",
           precoAntigo: "R$ 239,00",
           precoAtual: 179.0,
-          posicoes: { "Ouro 18k": pos(4, 4), "Ródio Branco": pos(8, 4), "Ouro Rosé": pos(8, 4) },
+          imagens: {
+            "Ouro 18k": "https://cdn.lisaangel.co.uk/image/cache/data/product-images/aw24/gr/gold-stainless-steel-mixed-sized-pearl-chain-bracelet-4x3a2039-copy-515x515.jpeg",
+            "Ródio Branco": "https://cdn.lisaangel.co.uk/image/cache/data/product-images/ss22/su-ss22/bracelets/freshwater-pearls-silver-chain-bracelet-443a0026copy-900x900.jpeg",
+            "Ouro Rosé": "https://cdn.lisaangel.co.uk/image/cache/data/product-images/ss22/su-ss22/bracelets/model-shots/freshwater-pearl-rose-gold-chain-bracelet-4x3a9008-900x900.jpeg"
+          },
           labelTamanho: "Tamanho",
           tamanhos: ["17cm + 3cm ext.", "19cm + 3cm ext."],
           subtitulo: "Pulseira Pérolas Delicadas — Brilho nacarado",
@@ -686,7 +740,11 @@
           categoria: "Pulseira",
           precoAntigo: "R$ 299,00",
           precoAtual: 235.0,
-          posicoes: { "Ouro 18k": pos(6, 4), "Ródio Branco": pos(7, 3), "Ouro Rosé": pos(2, 6) },
+          imagens: {
+            "Ouro 18k": "https://media.stories.com/assets/005/ec/eb/ecebf9b7a287e20331e721b12147ad696c9e1385_xxl-1.jpg?imwidth=2560",
+            "Ródio Branco": "http://www.diamondcellar.com/cdn/shop/products/sculpted-cable-contour-bracelet-in-sterling-silver-562989.jpg?v=1673681329",
+            "Ouro Rosé": "https://rubans.in/cdn/shop/files/rubans-rose-gold-plated-chain-link-open-cuff-bracelet-modern-statement-jewelry-bracelet-1177302861_1800x1800.jpg?v=1765520398"
+          },
           labelTamanho: "Tamanho",
           tamanhos: ["P (58mm)", "M (62mm)"],
           subtitulo: "Bracelete Elos Esculpidos — Textura em relevo",
@@ -699,7 +757,11 @@
           categoria: "Pulseira",
           precoAntigo: "R$ 219,00",
           precoAtual: 165.0,
-          posicoes: { "Ouro 18k": pos(0, 6), "Ródio Branco": pos(7, 5), "Ouro Rosé": pos(8, 5) },
+          imagens: {
+            "Ouro 18k": "https://i.etsystatic.com/27182836/r/il/31b2c8/8337625735/il_570xN.8337625735_hz9l.jpg",
+            "Ródio Branco": "https://khushbujewellers.com/cdn/shop/files/Silver_Simple_Square_Box_Design_Chain_Bracelet_for_Boys_16.jpg?v=1775217742&width=1946",
+            "Ouro Rosé": "https://media.jennyjonesjewellery.com/12860/conversions/vintage-vintage-bracelet-rose-gold-d37a56-product-gallery.jpg"
+          },
           labelTamanho: "Tamanho",
           tamanhos: ["18cm", "20cm"],
           subtitulo: "Pulseira Fio Delicado — Ideal para mix de pulseiras",
@@ -714,7 +776,11 @@
           categoria: "Anel",
           precoAntigo: "R$ 210,00",
           precoAtual: 159.0,
-          posicoes: { "Ouro 18k": pos(6, 0), "Ródio Branco": pos(7, 0), "Ouro Rosé": pos(8, 5) },
+          imagens: {
+            "Ouro 18k": "https://media.masonry.so/t/blog/ai-jewelry-product-photography/seedream45.png?w=1024",
+            "Ródio Branco": "https://touch925.com/cdn/shop/files/MQLR2831_2_78c3a6bb-0969-45c2-95bc-0d7284783212.jpg?v=1782200727&width=2000",
+            "Ouro Rosé": "https://media.thejewellershop.com/images/products/1000/VR0294_M.jpg"
+          },
           labelTamanho: "Numeração do Aro",
           tamanhos: ["14", "16", "18", "20", "22"],
           subtitulo: "Anel Solitário Atelier — Clássico eterno",
@@ -727,7 +793,11 @@
           categoria: "Anel",
           precoAntigo: "R$ 199,00",
           precoAtual: 149.0,
-          posicoes: { "Ouro 18k": pos(6, 2), "Ródio Branco": pos(5, 6), "Ouro Rosé": pos(8, 3) },
+          imagens: {
+            "Ouro 18k": "https://amyojewelry.com/cdn/shop/files/RING_stacker_gv_R015_R062_R109_AR1x1_C250301.jpg?v=1760657294&width=1200",
+            "Ródio Branco": "https://www.danielwellington.com/cdn/shop/files/ltkdwqpeket7xwc9b3mc.png?v=1756970206&width=1500",
+            "Ouro Rosé": "https://i.etsystatic.com/16346685/r/il/a5b156/1368377400/il_1080xN.1368377400_i2z3.jpg"
+          },
           labelTamanho: "Numeração do Aro",
           tamanhos: ["14", "16", "18", "20", "22"],
           subtitulo: "Anel Aparador Infinity — Perfeito para composições",
@@ -740,7 +810,11 @@
           categoria: "Anel",
           precoAntigo: "R$ 225,00",
           precoAtual: 169.0,
-          posicoes: { "Ouro 18k": pos(6, 6), "Ródio Branco": pos(7, 6), "Ouro Rosé": pos(8, 1) },
+          imagens: {
+            "Ouro 18k": "http://dianjewellery.com/cdn/shop/files/Ring.542.png?v=1771836688&width=2048",
+            "Ródio Branco": "https://cdn.shopify.com/s/files/1/0837/7489/8461/files/1-Reshoot_DomeRingSilver_SS_OnFig_002.jpg?v=1776124810&width=4096&quality=95",
+            "Ouro Rosé": "http://veatge.com/cdn/shop/products/Rose-gold-dome-ring7.jpg?v=1757107457&width=2048"
+          },
           labelTamanho: "Numeração do Aro",
           tamanhos: ["14", "16", "18", "20"],
           subtitulo: "Anel Liso Abaulado — Volume moderno e polimento espelhado",
@@ -753,7 +827,11 @@
           categoria: "Anel",
           precoAntigo: "R$ 249,00",
           precoAtual: 189.0,
-          posicoes: { "Ouro 18k": pos(0, 7), "Ródio Branco": pos(1, 7), "Ouro Rosé": pos(2, 7) },
+          imagens: {
+            "Ouro 18k": "https://i.etsystatic.com/9792770/r/il/07bcee/3102902381/il_570xN.3102902381_rouy.jpg",
+            "Ródio Branco": "http://atjewels.in/cdn/shop/products/13_4__36239.1594367771.jpg?v=1619505024",
+            "Ouro Rosé": "https://cdn.shoplightspeed.com/shops/606632/files/67087991/1024x1024x1/american-jewelry-18k-rose-gold-82ctw-diamond-bague.jpg"
+          },
           labelTamanho: "Numeração do Aro",
           tamanhos: ["14", "16", "18", "20"],
           subtitulo: "Anel Baguete Cristal — Sofisticação arquitetônica",
@@ -766,7 +844,11 @@
           categoria: "Anel",
           precoAntigo: "R$ 219,00",
           precoAtual: 165.0,
-          posicoes: { "Ouro 18k": pos(4, 7), "Ródio Branco": pos(5, 7), "Ouro Rosé": pos(6, 7) },
+          imagens: {
+            "Ouro 18k": "https://www.sarahhickey.co.uk/wp-content/uploads/2024/09/golden-wave.jpg",
+            "Ródio Branco": "https://i.etsystatic.com/25477428/r/il/cee799/7674117999/il_1080xN.7674117999_dczz.jpg",
+            "Ouro Rosé": "https://www.puravidabracelets.com/cdn/shop/products/3F9A7563_1.jpg?v=1743538804&width=1600"
+          },
           labelTamanho: "Numeração do Aro",
           tamanhos: ["14", "16", "18", "20", "22"],
           subtitulo: "Anel Ondas Entrelaçadas — Curvas suaves e orgânicas",
@@ -779,7 +861,11 @@
           categoria: "Anel",
           precoAntigo: "R$ 259,00",
           precoAtual: 195.0,
-          posicoes: { "Ouro 18k": pos(7, 7), "Ródio Branco": pos(7, 1), "Ouro Rosé": pos(8, 7) },
+          imagens: {
+            "Ouro 18k": "https://i.etsystatic.com/19043294/r/il/de1ce2/1868307209/il_570xN.1868307209_5ttq.jpg",
+            "Ródio Branco": "http://deakinandfrancis.com/cdn/shop/files/S0270-Signet-Gold-min-1-min.png?v=1723649396",
+            "Ouro Rosé": "https://www.marketsquarejewelers.com/cdn/shop/files/8389-33_1600x.jpg?v=1769613902"
+          },
           labelTamanho: "Numeração do Aro",
           tamanhos: ["14", "16", "18", "20"],
           subtitulo: "Anel Sinete Oval — Releitura contemporânea de um clássico",
@@ -803,13 +889,10 @@
         });
       }
 
-      // Gera o HTML de cada slide (imagem individual nítida ou fallback sprite)
       function gerarHtmlSlide(prod, banho) {
-        if (prod.imagens && prod.imagens[banho]) {
-          return `<div class="carrossel-slide"><img src="${prod.imagens[banho]}" alt="${prod.tituloCurto} - ${banho}" loading="lazy" /></div>`;
-        }
-        const posicao = (prod.posicoes && prod.posicoes[banho]) || "0% 0%";
-        return `<div class="carrossel-slide"><div class="sprite-joia" style="background-position: ${posicao};"></div></div>`;
+        const src =
+          (prod.imagens && prod.imagens[banho]) || IMAGEM_FALLBACK;
+        return `<div class="carrossel-slide"><img src="${src}" alt="${prod.tituloCurto} - ${banho}" loading="lazy" /></div>`;
       }
 
       function moverSlideCard(event, prodId, delta) {
@@ -1055,8 +1138,9 @@
           tamanho: tamanhoAtual,
           quantidade: quantidadeAtual,
           precoUnitario: produtoAtual.precoAtual,
-          imagem: produtoAtual.imagens ? produtoAtual.imagens[banhoAtual] : null,
-          posicao: produtoAtual.posicoes ? produtoAtual.posicoes[banhoAtual] : "0% 0%"
+          imagem:
+            (produtoAtual.imagens && produtoAtual.imagens[banhoAtual]) ||
+            IMAGEM_FALLBACK
         });
 
         atualizarCarrinhoUI();
@@ -1090,13 +1174,9 @@
           const subtotal = item.precoUnitario * item.quantidade;
           soma += subtotal;
 
-          const thumbHtml = item.imagem
-            ? `<img src="${item.imagem}" alt="${item.nome}" />`
-            : `<div class="sprite-joia" style="width:64px; height:64px; border-radius:4px; flex-shrink:0; background-position: ${item.posicao};"></div>`;
-
           lista.innerHTML += `
             <div class="item-sacola">
-              ${thumbHtml}
+              <img src="${item.imagem}" alt="${item.nome}" />
               <div class="item-sacola-info">
                 <h4>${item.nome}</h4>
                 <p>Banho: ${item.banho} • Tam: ${item.tamanho}</p>
