@@ -70,7 +70,7 @@
       </div>
 
       <div class="containers">
-        <a href="#destaques" class="topico-card">
+        <a href="#destaques" class="topico-card" onclick="buscarPorCategoria('Pingente')">
           <div class="img-wrapper">
             <img
               src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80"
@@ -83,7 +83,7 @@
           </div>
         </a>
 
-        <a href="#destaques" class="topico-card">
+        <a href="#destaques" class="topico-card" onclick="buscarPorCategoria('Colar')">
           <div class="img-wrapper">
             <img
               src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80"
@@ -96,7 +96,7 @@
           </div>
         </a>
 
-        <a href="#destaques" class="topico-card">
+        <a href="#destaques" class="topico-card" onclick="buscarPorCategoria('Pulseira')">
           <div class="img-wrapper">
             <img src="pulseira.jpeg" alt="Pulseiras Juwel Atelier" />
           </div>
@@ -106,7 +106,7 @@
           </div>
         </a>
 
-        <a href="#destaques" class="topico-card">
+        <a href="#destaques" class="topico-card" onclick="buscarPorCategoria('Anel')">
           <div class="img-wrapper">
             <img src="aneis.jpeg" alt="Anéis Juwel Atelier" />
           </div>
@@ -118,79 +118,41 @@
       </div>
     </section>
 
-    <!-- Vitrine de Produtos -->
+    <!-- Vitrine de Produtos com Barra de Pesquisa -->
     <section id="destaques" class="vitrine-vendas">
       <div class="section-header">
         <span class="subtitulo-escuro">SELEÇÃO EXCLUSIVA</span>
         <h2>Destaques do Atelier</h2>
       </div>
 
-      <div class="grid-produtos">
-        <!-- Produto 1 -->
-        <div class="produto-card" onclick="abrirProduto(0)">
-          <div class="produto-img">
-            <span class="tag-banho">Promoção</span>
-            <img
-              src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80"
-              alt="Colar Essência Luz"
-            />
-          </div>
-          <div class="produto-detalhes">
-            <h3>Colar Essência Luz</h3>
-            <p class="preco-antigo">R$ 249,00</p>
-            <p class="preco">R$ 189,00</p>
-            <button type="button" class="btn-comprar">Escolher Opções</button>
-          </div>
+      <!-- Barra de Pesquisa -->
+      <div class="barra-pesquisa-container">
+        <div class="barra-pesquisa-box">
+          <input
+            type="search"
+            id="campo-pesquisa"
+            placeholder="O que você procura? Ex.: anel, colar, pulseira, pingente..."
+            oninput="filtrarProdutos()"
+            aria-label="Pesquisar joias"
+          />
+          <button
+            type="button"
+            id="btn-limpar-pesquisa"
+            class="btn-limpar-busca"
+            onclick="limparPesquisa()"
+            title="Limpar pesquisa"
+          >
+            ✕
+          </button>
         </div>
-
-        <!-- Produto 2 (usando sua foto real aneis.jpeg) -->
-        <div class="produto-card" onclick="abrirProduto(1)">
-          <div class="produto-img">
-            <span class="tag-banho">Promoção</span>
-            <img src="aneis.jpeg" alt="Anel Solitário Atelier" />
-          </div>
-          <div class="produto-detalhes">
-            <h3>Anel Solitário Atelier</h3>
-            <p class="preco-antigo">R$ 210,00</p>
-            <p class="preco">R$ 159,00</p>
-            <button type="button" class="btn-comprar">Escolher Opções</button>
-          </div>
-        </div>
-
-        <!-- Produto 3 (usando sua foto real pulseira.jpeg) -->
-        <div class="produto-card" onclick="abrirProduto(2)">
-          <div class="produto-img">
-            <span class="tag-banho">Promoção</span>
-            <img src="pulseira.jpeg" alt="Pulseira Elo Imperial" />
-          </div>
-          <div class="produto-detalhes">
-            <h3>Pulseira Elo Imperial</h3>
-            <p class="preco-antigo">R$ 279,00</p>
-            <p class="preco">R$ 219,00</p>
-            <button type="button" class="btn-comprar">Escolher Opções</button>
-          </div>
-        </div>
-
-        <!-- Produto 4 -->
-        <div class="produto-card" onclick="abrirProduto(3)">
-          <div class="produto-img">
-            <span class="tag-banho">Promoção</span>
-            <img
-              src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80"
-              alt="Pingente Medalha Orgânica"
-            />
-          </div>
-          <div class="produto-detalhes">
-            <h3>Pingente Medalha Orgânica</h3>
-            <p class="preco-antigo">R$ 189,00</p>
-            <p class="preco">R$ 139,00</p>
-            <button type="button" class="btn-comprar">Escolher Opções</button>
-          </div>
-        </div>
+        <p id="resultado-pesquisa" class="resultado-pesquisa"></p>
       </div>
+
+      <!-- Grade preenchida dinamicamente pelo JavaScript -->
+      <div id="grid-produtos" class="grid-produtos"></div>
     </section>
 
-    <!-- MODAL DE DETALHES DO PRODUTO (Estilo página de venda Graseffe) -->
+    <!-- MODAL DE DETALHES DO PRODUTO -->
     <div id="modal-produto" class="modal-backdrop" onclick="fecharModalFora(event)">
       <div class="modal-box">
         <button class="modal-fechar" onclick="fecharModal()" aria-label="Fechar">✕</button>
@@ -246,9 +208,7 @@
             <!-- Seletor de Tamanho / Aro -->
             <div class="seletor-grupo">
               <label id="label-tamanho">Tamanho</label>
-              <div class="opcoes-tamanhos" id="lista-tamanhos">
-                <!-- Preenchido via JS conforme a peça -->
-              </div>
+              <div class="opcoes-tamanhos" id="lista-tamanhos"></div>
             </div>
 
             <!-- Quantidade -->
@@ -275,7 +235,7 @@
             <div class="modal-descricao-extra">
               <h3 id="modal-subtitulo-desc">Brilho duradouro e acabamento artesanal</h3>
               <p id="modal-texto-desc">
-                Peça produzida com rigoroso controle de qualidade e camada nobre de banho hipoalergênico, garantindo conforto e sofisticação para o uso diário ou ocasiões especiais.
+                Peça produzida com rigoroso controle de qualidade e camada nobre de banho hipoalergênico.
               </p>
             </div>
           </div>
@@ -330,7 +290,7 @@
         fill="currentColor"
       >
         <path
-          d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"
+          d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-16 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"
         />
       </svg>
     </a>
@@ -342,7 +302,10 @@
 
       const produtos = [
         {
+          id: 0,
+          tituloCurto: "Colar Essência Luz",
           nome: "Colar Essência Luz | Elegância e brilho atemporal",
+          categoria: "Colar",
           precoAntigo: "R$ 249,00",
           precoAtual: 189.0,
           imagem:
@@ -354,7 +317,10 @@
             "Corrente veneziana fina com ponto de luz cravejado. Recebe banho nobre de alta camada com verniz protetor hipoalergênico."
         },
         {
+          id: 1,
+          tituloCurto: "Anel Solitário Atelier",
           nome: "Anel Solitário Atelier | Acabamento de alta joalheria",
+          categoria: "Anel",
           precoAntigo: "R$ 210,00",
           precoAtual: 159.0,
           imagem: "aneis.jpeg",
@@ -365,7 +331,10 @@
             "Design clássico com cravação manual e polimento espelhado. Desenvolvido para manter o brilho intenso mesmo no uso diário."
         },
         {
+          id: 2,
+          tituloCurto: "Pulseira Elo Imperial",
           nome: "Pulseira Elo Imperial | Sofisticação em cada elo",
+          categoria: "Pulseira",
           precoAntigo: "R$ 279,00",
           precoAtual: 219.0,
           imagem: "pulseira.jpeg",
@@ -376,7 +345,10 @@
             "Elos articulados com fecho seguro e extensor ajustável. Ideal para usar sozinha ou em composições."
         },
         {
+          id: 3,
+          tituloCurto: "Pingente Medalha Orgânica",
           nome: "Pingente Medalha Orgânica | Design exclusivo",
+          categoria: "Pingente",
           precoAntigo: "R$ 189,00",
           precoAtual: 139.0,
           imagem:
@@ -386,6 +358,64 @@
           subtitulo: "Pingente Medalha Orgânica — Arte e significado",
           descricao:
             "Textura orgânica feita à mão no ateliê com banho de alta durabilidade e acabamento acetinado."
+        },
+        {
+          id: 4,
+          tituloCurto: "Anel Aparador Infinity",
+          nome: "Anel Aparador Infinity | Brilho contínuo",
+          categoria: "Anel",
+          precoAntigo: "R$ 199,00",
+          precoAtual: 149.0,
+          imagem: "aneis.jpeg",
+          labelTamanho: "Numeração do Aro",
+          tamanhos: ["14", "16", "18", "20", "22"],
+          subtitulo: "Anel Aparador Infinity — Versatilidade elegante",
+          descricao:
+            "Perfeito para acompanhar alianças ou usar sozinho. Cravação de alta precisão com banho de excelente resistência."
+        },
+        {
+          id: 5,
+          tituloCurto: "Pulseira Riviera Clássica",
+          nome: "Pulseira Riviera Clássica | Luxo em movimento",
+          categoria: "Pulseira",
+          precoAntigo: "R$ 349,00",
+          precoAtual: 279.0,
+          imagem: "pulseira.jpeg",
+          labelTamanho: "Tamanho",
+          tamanhos: ["17cm", "18cm", "19cm"],
+          subtitulo: "Pulseira Riviera Clássica — Caimento impecável",
+          descricao:
+            "Fileira uniforme com brilho lapidado e trava dupla de segurança. Uma peça atemporal para eventos e dia a dia."
+        },
+        {
+          id: 6,
+          tituloCurto: "Colar Gravatinha Pérola",
+          nome: "Colar Gravatinha Pérola | Feminilidade refinada",
+          categoria: "Colar",
+          precoAntigo: "R$ 229,00",
+          precoAtual: 175.0,
+          imagem:
+            "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80",
+          labelTamanho: "Comprimento da Corrente",
+          tamanhos: ["45cm", "50cm", "55cm"],
+          subtitulo: "Colar Gravatinha Pérola — Charme sutil",
+          descricao:
+            "Caimento em Y que valoriza o colo com elegância. Banho nobre com acabamento suave ao toque."
+        },
+        {
+          id: 7,
+          tituloCurto: "Pingente Relicário Coração",
+          nome: "Pingente Relicário Coração | Memórias eternizadas",
+          categoria: "Pingente",
+          precoAntigo: "R$ 219,00",
+          precoAtual: 169.0,
+          imagem:
+            "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
+          labelTamanho: "Tamanho do Relicário",
+          tamanhos: ["Médio (18mm)", "Grande (24mm)"],
+          subtitulo: "Pingente Relicário Coração — Afeto em forma de joia",
+          descricao:
+            "Abre com delicadeza para guardar pequenas recordações. Fabricado com banho de alta qualidade."
         }
       ];
 
@@ -402,8 +432,79 @@
         });
       }
 
+      function renderizarProdutos(lista) {
+        const grid = document.getElementById("grid-produtos");
+        const infoResultado = document.getElementById("resultado-pesquisa");
+        const termo = document.getElementById("campo-pesquisa").value.trim();
+
+        if (termo === "") {
+          infoResultado.textContent = `Exibindo ${lista.length} peças disponíveis`;
+        } else if (lista.length === 0) {
+          infoResultado.innerHTML = `Nenhuma peça encontrada para "<strong>${termo}</strong>". <button type="button" class="link-reset-busca" onclick="limparPesquisa()">Ver todas as peças</button>`;
+        } else {
+          infoResultado.textContent = `${lista.length} ${lista.length === 1 ? "peça encontrada" : "peças encontradas"} para "${termo}"`;
+        }
+
+        if (lista.length === 0) {
+          grid.innerHTML = "";
+          return;
+        }
+
+        grid.innerHTML = lista
+          .map(
+            (prod) => `
+          <div class="produto-card" onclick="abrirProduto(${prod.id})">
+            <div class="produto-img">
+              <span class="tag-banho">Promoção</span>
+              <img src="${prod.imagem}" alt="${prod.tituloCurto}" />
+            </div>
+            <div class="produto-detalhes">
+              <h3>${prod.tituloCurto}</h3>
+              <p class="preco-antigo">${prod.precoAntigo}</p>
+              <p class="preco">${formatarMoeda(prod.precoAtual)}</p>
+              <button type="button" class="btn-comprar">Escolher Opções</button>
+            </div>
+          </div>
+        `
+          )
+          .join("");
+      }
+
+      function filtrarProdutos() {
+        const termo = document
+          .getElementById("campo-pesquisa")
+          .value.toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .trim();
+
+        const btnLimpar = document.getElementById("btn-limpar-pesquisa");
+        btnLimpar.style.display = termo ? "flex" : "none";
+
+        const filtrados = produtos.filter((prod) => {
+          const textoBusca = `${prod.tituloCurto} ${prod.nome} ${prod.categoria} ${prod.descricao}`
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "");
+          return textoBusca.includes(termo);
+        });
+
+        renderizarProdutos(filtrados);
+      }
+
+      function limparPesquisa() {
+        document.getElementById("campo-pesquisa").value = "";
+        filtrarProdutos();
+      }
+
+      function buscarPorCategoria(categoria) {
+        const campo = document.getElementById("campo-pesquisa");
+        campo.value = categoria;
+        filtrarProdutos();
+      }
+
       function abrirProduto(indice) {
-        produtoAtual = produtos[indice];
+        produtoAtual = produtos.find((p) => p.id === indice) || produtos[0];
         quantidadeAtual = 1;
         banhoAtual = "Ouro 18k";
 
@@ -419,13 +520,11 @@
         document.getElementById("modal-texto-desc").textContent =
           produtoAtual.descricao;
 
-        // Reseta seleção de banho
         document.getElementById("banho-selecionado").textContent = banhoAtual;
         document.querySelectorAll(".cor-bolinha").forEach((b, i) => {
           b.classList.toggle("ativo", i === 0);
         });
 
-        // Monta opções de tamanho
         document.getElementById("label-tamanho").textContent =
           produtoAtual.labelTamanho;
         const containerTamanhos = document.getElementById("lista-tamanhos");
@@ -494,7 +593,7 @@
 
       function adicionarAoCarrinho() {
         carrinho.push({
-          nome: produtoAtual.nome.split("|")[0].trim(),
+          nome: produtoAtual.tituloCurto,
           banho: banhoAtual,
           tamanho: tamanhoAtual,
           quantidade: quantidadeAtual,
@@ -576,6 +675,9 @@
         const url = `https://wa.me/${TELEFONE_WHATSAPP}?text=${encodeURIComponent(texto)}`;
         window.open(url, "_blank");
       }
+
+      // Renderiza todas as 8 peças ao carregar a página
+      renderizarProdutos(produtos);
     </script>
   </body>
 </html>
