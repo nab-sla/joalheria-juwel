@@ -12,6 +12,126 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <style>
+      /* Carrossel horizontal limpo nos cards e no modal */
+      .carrossel-viewport {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-color: #f4f1ec;
+      }
+
+      .carrossel-trilho {
+        display: flex;
+        width: 300%;
+        height: 100%;
+        transition: transform 0.38s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+
+      .carrossel-slide {
+        width: 33.3333%;
+        height: 100%;
+        flex-shrink: 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .carrossel-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* Fallback para itens que ainda usam a grade imagens/catalogo.jpg */
+      .sprite-joia {
+        width: 100%;
+        height: 100%;
+        background-image: url("imagens/catalogo.jpg");
+        background-size: 900% 800%;
+        background-repeat: no-repeat;
+      }
+
+      /* Setas laterais do carrossel */
+      .seta-carrossel {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 1px solid rgba(100, 35, 52, 0.2);
+        background-color: rgba(255, 255, 255, 0.9);
+        color: var(--vinho-marca);
+        font-size: 16px;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 3;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+      }
+
+      .seta-carrossel:hover {
+        background-color: var(--vinho-marca);
+        color: #ffffff;
+      }
+
+      .seta-prev {
+        left: 10px;
+      }
+
+      .seta-next {
+        right: 10px;
+      }
+
+      .produto-card .seta-carrossel {
+        opacity: 0;
+      }
+
+      .produto-card:hover .seta-carrossel {
+        opacity: 1;
+      }
+
+      /* Indicadores (bolinhas) na base da foto */
+      .carrossel-dots {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 6px;
+        z-index: 3;
+        background: rgba(255, 255, 255, 0.78);
+        padding: 4px 9px;
+        border-radius: 999px;
+      }
+
+      .carrossel-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        border: none;
+        background-color: rgba(30, 28, 26, 0.28);
+        cursor: pointer;
+        padding: 0;
+        transition: transform 0.2s ease, background-color 0.2s ease;
+      }
+
+      .carrossel-dot.ativo {
+        background-color: var(--vinho-marca);
+        transform: scale(1.25);
+      }
+
+      @media (max-width: 768px) {
+        .produto-card .seta-carrossel {
+          opacity: 1;
+        }
+      }
+    </style>
   </head>
 
   <body>
@@ -20,37 +140,70 @@
       Peças exclusivas com banhos de alta qualidade • Envio para todo o Brasil
     </div>
 
-    <!-- Cabeçalho minimalista com Sacola -->
+    <!-- Cabeçalho com Busca Integrada e Sacola -->
     <header class="header">
-      <nav class="nav-links">
-        <a href="#sobre">O Atelier</a>
-        <a href="#categorias">Categorias</a>
-      </nav>
-
-      <a href="#" class="marca">JUWEL ATELIER</a>
-
-      <div class="header-right">
+      <div class="header-left">
+        <a href="#" class="marca">JUWEL ATELIER</a>
         <nav class="nav-links">
-          <a href="#destaques">Peças</a>
+          <a href="#sobre">O Atelier</a>
+          <a href="#categorias">Categorias</a>
+          <a href="#destaques">Coleção</a>
           <a href="#contato">Contato</a>
         </nav>
+      </div>
+
+      <div class="header-right">
+        <div class="header-search">
+          <input
+            type="search"
+            id="campo-pesquisa"
+            placeholder="O que você procura?"
+            oninput="filtrarProdutos(true)"
+            aria-label="Pesquisar joias"
+          />
+          <button
+            type="button"
+            id="btn-limpar-pesquisa"
+            class="btn-limpar-header"
+            onclick="limparPesquisa()"
+            title="Limpar busca"
+          >
+            ✕
+          </button>
+          <span class="search-icon" aria-hidden="true">
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </span>
+        </div>
+
         <button class="btn-sacola" onclick="abrirCarrinho()" aria-label="Abrir Sacola">
           Sacola (<span id="contador-sacola">0</span>)
         </button>
       </div>
     </header>
 
-    <!-- Banner Principal (Hero Section) -->
+    <!-- Banner Principal -->
     <section class="hero">
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <span class="subtitulo">JOALHERIA AUTORAL</span>
         <h2>Arte, brilho e significado em cada detalhe</h2>
-        <a href="#destaques" class="btn-explorar">Ver Coleção</a>
+        <a href="#destaques" class="btn-explorar">Explorar Coleção</a>
       </div>
     </section>
 
-    <!-- Seção Manifesto / Sobre -->
+    <!-- Seção Manifesto -->
     <section id="sobre" class="manifesto">
       <div class="manifesto-container">
         <span class="ornamento">✦</span>
@@ -70,100 +223,110 @@
       </div>
 
       <div class="containers">
-        <a href="#destaques" class="topico-card" onclick="buscarPorCategoria('Pingente')">
+        <a href="#destaques" class="topico-card" onclick="selecionarCategoria('Pingente')">
           <div class="img-wrapper">
-            <img
-              src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80"
-              alt="Pingentes Juwel Atelier"
-            />
+            <div class="sprite-joia" style="background-position: 0% 0%;"></div>
           </div>
           <div class="topico-info">
             <h3>Pingentes</h3>
-            <span>Explorar →</span>
+            <span>6 peças →</span>
           </div>
         </a>
 
-        <a href="#destaques" class="topico-card" onclick="buscarPorCategoria('Colar')">
+        <a href="#destaques" class="topico-card" onclick="selecionarCategoria('Colar')">
           <div class="img-wrapper">
-            <img
-              src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80"
-              alt="Colares Juwel Atelier"
-            />
+            <div class="sprite-joia" style="background-position: 37.5% 28.57%;"></div>
           </div>
           <div class="topico-info">
             <h3>Colares</h3>
-            <span>Explorar →</span>
+            <span>6 peças →</span>
           </div>
         </a>
 
-        <a href="#destaques" class="topico-card" onclick="buscarPorCategoria('Pulseira')">
+        <a href="#destaques" class="topico-card" onclick="selecionarCategoria('Pulseira')">
           <div class="img-wrapper">
-            <img src="pulseira.jpeg" alt="Pulseiras Juwel Atelier" />
+            <img src="imagens/pulseira-imperial-ouro.jpg" alt="Pulseiras Juwel Atelier" />
           </div>
           <div class="topico-info">
             <h3>Pulseiras</h3>
-            <span>Explorar →</span>
+            <span>6 peças →</span>
           </div>
         </a>
 
-        <a href="#destaques" class="topico-card" onclick="buscarPorCategoria('Anel')">
+        <a href="#destaques" class="topico-card" onclick="selecionarCategoria('Anel')">
           <div class="img-wrapper">
-            <img src="aneis.jpeg" alt="Anéis Juwel Atelier" />
+            <img src="imagens/aneis.jpeg" alt="Anéis Juwel Atelier" />
           </div>
           <div class="topico-info">
             <h3>Anéis</h3>
-            <span>Explorar →</span>
+            <span>6 peças →</span>
           </div>
         </a>
       </div>
     </section>
 
-    <!-- Vitrine de Produtos com Barra de Pesquisa -->
+    <!-- Vitrine Completa de Produtos -->
     <section id="destaques" class="vitrine-vendas">
       <div class="section-header">
-        <span class="subtitulo-escuro">SELEÇÃO EXCLUSIVA</span>
-        <h2>Destaques do Atelier</h2>
+        <span class="subtitulo-escuro">CATÁLOGO COMPLETO</span>
+        <h2>Peças do Atelier</h2>
       </div>
 
-      <!-- Barra de Pesquisa -->
-      <div class="barra-pesquisa-container">
-        <div class="barra-pesquisa-box">
-          <input
-            type="search"
-            id="campo-pesquisa"
-            placeholder="O que você procura? Ex.: anel, colar, pulseira, pingente..."
-            oninput="filtrarProdutos()"
-            aria-label="Pesquisar joias"
-          />
-          <button
-            type="button"
-            id="btn-limpar-pesquisa"
-            class="btn-limpar-busca"
-            onclick="limparPesquisa()"
-            title="Limpar pesquisa"
-          >
-            ✕
-          </button>
-        </div>
-        <p id="resultado-pesquisa" class="resultado-pesquisa"></p>
+      <div class="filtros-abas">
+        <button type="button" class="aba-btn ativo" onclick="selecionarCategoria('Todos')">
+          Todos (24)
+        </button>
+        <button type="button" class="aba-btn" onclick="selecionarCategoria('Pingente')">
+          Pingentes (6)
+        </button>
+        <button type="button" class="aba-btn" onclick="selecionarCategoria('Colar')">
+          Colares (6)
+        </button>
+        <button type="button" class="aba-btn" onclick="selecionarCategoria('Pulseira')">
+          Pulseiras (6)
+        </button>
+        <button type="button" class="aba-btn" onclick="selecionarCategoria('Anel')">
+          Anéis (6)
+        </button>
       </div>
 
-      <!-- Grade preenchida dinamicamente pelo JavaScript -->
+      <p id="resultado-pesquisa" class="resultado-pesquisa"></p>
       <div id="grid-produtos" class="grid-produtos"></div>
     </section>
 
-    <!-- MODAL DE DETALHES DO PRODUTO -->
+    <!-- MODAL DE DETALHES DO PRODUTO COM CARROSSEL LATERAL -->
     <div id="modal-produto" class="modal-backdrop" onclick="fecharModalFora(event)">
       <div class="modal-box">
         <button class="modal-fechar" onclick="fecharModal()" aria-label="Fechar">✕</button>
 
         <div class="modal-grid">
-          <!-- Coluna Esquerda: Foto Grande -->
           <div class="modal-foto">
-            <img id="modal-img" src="" alt="Foto da Joia" />
+            <div class="carrossel-viewport">
+              <button
+                type="button"
+                class="seta-carrossel seta-prev"
+                onclick="moverSlideModal(-1)"
+                aria-label="Banho anterior"
+              >
+                ‹
+              </button>
+              <div id="modal-trilho" class="carrossel-trilho"></div>
+              <button
+                type="button"
+                class="seta-carrossel seta-next"
+                onclick="moverSlideModal(1)"
+                aria-label="Próximo banho"
+              >
+                ›
+              </button>
+              <div class="carrossel-dots" id="modal-dots">
+                <button type="button" class="carrossel-dot ativo" onclick="irParaSlideModal(0)"></button>
+                <button type="button" class="carrossel-dot" onclick="irParaSlideModal(1)"></button>
+                <button type="button" class="carrossel-dot" onclick="irParaSlideModal(2)"></button>
+              </div>
+            </div>
           </div>
 
-          <!-- Coluna Direita: Informações e Compra -->
           <div class="modal-info">
             <span class="modal-marca">JUWEL ATELIER</span>
             <h2 id="modal-titulo">Nome da Joia</h2>
@@ -174,7 +337,6 @@
               <span class="badge-promocao">Promoção</span>
             </div>
 
-            <!-- Seletor de Banho / Cor -->
             <div class="seletor-grupo">
               <label>Banho: <strong id="banho-selecionado">Ouro 18k</strong></label>
               <div class="opcoes-cores" id="lista-banhos">
@@ -183,6 +345,7 @@
                   class="cor-bolinha ativo"
                   style="background-color: #d4af37"
                   data-nome="Ouro 18k"
+                  data-indice="0"
                   onclick="selecionarBanho(this)"
                   title="Ouro 18k"
                 ></button>
@@ -191,6 +354,7 @@
                   class="cor-bolinha"
                   style="background-color: #dcdcdc"
                   data-nome="Ródio Branco"
+                  data-indice="1"
                   onclick="selecionarBanho(this)"
                   title="Ródio Branco"
                 ></button>
@@ -199,19 +363,18 @@
                   class="cor-bolinha"
                   style="background-color: #e0a99a"
                   data-nome="Ouro Rosé"
+                  data-indice="2"
                   onclick="selecionarBanho(this)"
                   title="Ouro Rosé"
                 ></button>
               </div>
             </div>
 
-            <!-- Seletor de Tamanho / Aro -->
             <div class="seletor-grupo">
               <label id="label-tamanho">Tamanho</label>
               <div class="opcoes-tamanhos" id="lista-tamanhos"></div>
             </div>
 
-            <!-- Quantidade -->
             <div class="seletor-grupo">
               <label>Quantidade</label>
               <div class="controle-qtd">
@@ -221,7 +384,6 @@
               </div>
             </div>
 
-            <!-- Botões de Ação -->
             <div class="modal-acoes">
               <button type="button" class="btn-outline" onclick="adicionarAoCarrinho()">
                 Adicionar ao carrinho
@@ -231,12 +393,9 @@
               </button>
             </div>
 
-            <!-- Texto editorial inferior -->
             <div class="modal-descricao-extra">
               <h3 id="modal-subtitulo-desc">Brilho duradouro e acabamento artesanal</h3>
-              <p id="modal-texto-desc">
-                Peça produzida com rigoroso controle de qualidade e camada nobre de banho hipoalergênico.
-              </p>
+              <p id="modal-texto-desc"></p>
             </div>
           </div>
         </div>
@@ -282,148 +441,360 @@
       target="_blank"
       aria-label="Falar no WhatsApp"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 448 512"
-        width="28"
-        height="28"
-        fill="currentColor"
-      >
-        <path
-          d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-16 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"
-        />
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="28" height="28" fill="currentColor">
+        <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
       </svg>
     </a>
 
-    <!-- Script de Interação da Loja -->
     <script>
       // COLOQUE SEU NÚMERO DE WHATSAPP AQUI (55 + DDD + Número)
       const TELEFONE_WHATSAPP = "5511999999999";
+      const BANHOS_ORDEM = ["Ouro 18k", "Ródio Branco", "Ouro Rosé"];
+
+      function pos(col, row) {
+        const x = (col / 8) * 100;
+        const y = (row / 7) * 100;
+        return `${x.toFixed(2)}% ${y.toFixed(2)}%`;
+      }
 
       const produtos = [
-        {
-          id: 0,
-          tituloCurto: "Colar Essência Luz",
-          nome: "Colar Essência Luz | Elegância e brilho atemporal",
-          categoria: "Colar",
-          precoAntigo: "R$ 249,00",
-          precoAtual: 189.0,
-          imagem:
-            "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
-          labelTamanho: "Comprimento da Corrente",
-          tamanhos: ["40cm", "45cm", "50cm", "60cm"],
-          subtitulo: "Colar Essência Luz — Delicadeza que ilumina",
-          descricao:
-            "Corrente veneziana fina com ponto de luz cravejado. Recebe banho nobre de alta camada com verniz protetor hipoalergênico."
-        },
+        // ================= PINGENTES (6 ITENS) =================
         {
           id: 1,
-          tituloCurto: "Anel Solitário Atelier",
-          nome: "Anel Solitário Atelier | Acabamento de alta joalheria",
-          categoria: "Anel",
-          precoAntigo: "R$ 210,00",
-          precoAtual: 159.0,
-          imagem: "aneis.jpeg",
-          labelTamanho: "Numeração do Aro",
-          tamanhos: ["14", "16", "18", "20", "22"],
-          subtitulo: "Anel Solitário Atelier — Presença marcante",
-          descricao:
-            "Design clássico com cravação manual e polimento espelhado. Desenvolvido para manter o brilho intenso mesmo no uso diário."
+          tituloCurto: "Pingente Medalha Orgânica",
+          nome: "Pingente Medalha Orgânica | Arte e textura artesanal",
+          categoria: "Pingente",
+          precoAntigo: "R$ 189,00",
+          precoAtual: 139.0,
+          posicoes: { "Ouro 18k": pos(0, 0), "Ródio Branco": pos(1, 0), "Ouro Rosé": pos(2, 0) },
+          labelTamanho: "Tamanho",
+          tamanhos: ["Pequeno (15mm)", "Médio (20mm)"],
+          subtitulo: "Pingente Medalha Orgânica — Brilho acetinado",
+          descricao: "Superfície levemente ondulada feita à mão com banho de alta camada e verniz protetor."
         },
         {
           id: 2,
+          tituloCurto: "Pingente Relicário Coração",
+          nome: "Pingente Relicário Coração | Memórias eternizadas",
+          categoria: "Pingente",
+          precoAntigo: "R$ 229,00",
+          precoAtual: 169.0,
+          posicoes: { "Ouro 18k": pos(0, 1), "Ródio Branco": pos(1, 1), "Ouro Rosé": pos(2, 1) },
+          labelTamanho: "Tamanho",
+          tamanhos: ["18mm", "24mm"],
+          subtitulo: "Pingente Relicário Coração — Afeto em forma de joia",
+          descricao: "Abertura delicada com fecho preciso para guardar fotos ou pequenas lembranças."
+        },
+        {
+          id: 3,
+          tituloCurto: "Pingente Gota Cristal",
+          nome: "Pingente Gota Cristal | Lapidação luminosa",
+          categoria: "Pingente",
+          precoAntigo: "R$ 179,00",
+          precoAtual: 129.0,
+          posicoes: { "Ouro 18k": pos(3, 1), "Ródio Branco": pos(4, 1), "Ouro Rosé": pos(5, 1) },
+          labelTamanho: "Tamanho",
+          tamanhos: ["12mm", "16mm"],
+          subtitulo: "Pingente Gota Cristal — Ponto de luz sofisticado",
+          descricao: "Zircônia em lapidação gota com galeria vazada para máxima entrada de luz."
+        },
+        {
+          id: 4,
+          tituloCurto: "Pingente Sol Radiante",
+          nome: "Pingente Sol Radiante | Energia e presença",
+          categoria: "Pingente",
+          precoAntigo: "R$ 199,00",
+          precoAtual: 149.0,
+          posicoes: { "Ouro 18k": pos(0, 3), "Ródio Branco": pos(1, 2), "Ouro Rosé": pos(2, 3) },
+          labelTamanho: "Tamanho",
+          tamanhos: ["18mm", "22mm"],
+          subtitulo: "Pingente Sol Radiante — Raios esculpidos em relevo",
+          descricao: "Acabamento polido espelhado com microcravação central de alto brilho."
+        },
+        {
+          id: 5,
+          tituloCurto: "Pingente Cruz Clássica",
+          nome: "Pingente Cruz Clássica | Devoção e elegância",
+          categoria: "Pingente",
+          precoAntigo: "R$ 185,00",
+          precoAtual: 135.0,
+          posicoes: { "Ouro 18k": pos(0, 4), "Ródio Branco": pos(1, 4), "Ouro Rosé": pos(3, 3) },
+          labelTamanho: "Tamanho",
+          tamanhos: ["20mm", "28mm"],
+          subtitulo: "Pingente Cruz Clássica — Linhas limpas e atemporais",
+          descricao: "Traços minimalistas com argola reforçada para combinar com diferentes correntes."
+        },
+        {
+          id: 6,
+          tituloCurto: "Pingente Pérola Barroca",
+          nome: "Pingente Pérola Barroca | Naturalidade única",
+          categoria: "Pingente",
+          precoAntigo: "R$ 215,00",
+          precoAtual: 159.0,
+          posicoes: { "Ouro 18k": pos(0, 5), "Ródio Branco": pos(1, 5), "Ouro Rosé": pos(2, 5) },
+          labelTamanho: "Tamanho",
+          tamanhos: ["Único (16mm)"],
+          subtitulo: "Pingente Pérola Barroca — Cada peça com formato exclusivo",
+          descricao: "Pérola natural cultivada com pino e contra-argola em banho nobre."
+        },
+
+        // ================= COLARES (6 ITENS) =================
+        {
+          id: 7,
+          tituloCurto: "Colar Essência Luz",
+          nome: "Colar Essência Luz | Ponto de luz atemporal",
+          categoria: "Colar",
+          precoAntigo: "R$ 249,00",
+          precoAtual: 189.0,
+          posicoes: { "Ouro 18k": pos(3, 4), "Ródio Branco": pos(4, 3), "Ouro Rosé": pos(5, 5) },
+          labelTamanho: "Comprimento",
+          tamanhos: ["40cm", "45cm", "50cm"],
+          subtitulo: "Colar Essência Luz — Delicadeza para todos os dias",
+          descricao: "Corrente veneziana fina com zircônia central de brilho intenso e fecho lagosta."
+        },
+        {
+          id: 8,
+          tituloCurto: "Colar Gravatinha Pérola",
+          nome: "Colar Gravatinha Pérola | Caimento refinado",
+          categoria: "Colar",
+          precoAntigo: "R$ 269,00",
+          precoAtual: 199.0,
+          posicoes: { "Ouro 18k": pos(3, 5), "Ródio Branco": pos(4, 4), "Ouro Rosé": pos(4, 5) },
+          labelTamanho: "Comprimento",
+          tamanhos: ["45cm", "50cm"],
+          subtitulo: "Colar Gravatinha Pérola — Valoriza o colo com sutileza",
+          descricao: "Design em Y articulado com pérolas selecionadas e banho hipoalergênico."
+        },
+        {
+          id: 9,
+          tituloCurto: "Colar Elo Português",
+          nome: "Colar Elo Português | Clássico indispensável",
+          categoria: "Colar",
+          precoAntigo: "R$ 299,00",
+          precoAtual: 229.0,
+          posicoes: { "Ouro 18k": pos(3, 4), "Ródio Branco": pos(4, 2), "Ouro Rosé": pos(5, 2) },
+          labelTamanho: "Comprimento",
+          tamanhos: ["45cm", "50cm", "60cm"],
+          subtitulo: "Colar Elo Português — Estrutura firme e polimento espelhado",
+          descricao: "Elos arredondados perfeitos para usar sozinho ou com pingentes maiores."
+        },
+        {
+          id: 10,
+          tituloCurto: "Colar Duplo Constelação",
+          nome: "Colar Duplo Constelação | Camadas em harmonia",
+          categoria: "Colar",
+          precoAntigo: "R$ 319,00",
+          precoAtual: 245.0,
+          posicoes: { "Ouro 18k": pos(5, 3), "Ródio Branco": pos(4, 2), "Ouro Rosé": pos(5, 2) },
+          labelTamanho: "Comprimento",
+          tamanhos: ["40cm / 45cm", "45cm / 50cm"],
+          subtitulo: "Colar Duplo Constelação — Mix pronto sem embaraçar",
+          descricao: "Duas correntes unidas em um único fecho com micro pontos de luz espaçados."
+        },
+        {
+          id: 11,
+          tituloCurto: "Colar Trevo Madrepérola",
+          nome: "Colar Trevo Madrepérola | Sorte e elegância",
+          categoria: "Colar",
+          precoAntigo: "R$ 289,00",
+          precoAtual: 219.0,
+          posicoes: { "Ouro 18k": pos(3, 6), "Ródio Branco": pos(4, 3), "Ouro Rosé": pos(3, 7) },
+          labelTamanho: "Comprimento",
+          tamanhos: ["40cm + 5cm ext.", "45cm + 5cm ext."],
+          subtitulo: "Colar Trevo Madrepérola — Detalhes em madrepérola natural",
+          descricao: "Pingente fixo lapidado com moldura delicada e banho de longa duração."
+        },
+        {
+          id: 12,
+          tituloCurto: "Colar Medalhas Duplas",
+          nome: "Colar Medalhas Duplas | Brilho em camadas",
+          categoria: "Colar",
+          precoAntigo: "R$ 279,00",
+          precoAtual: 209.0,
+          posicoes: { "Ouro 18k": pos(5, 3), "Ródio Branco": pos(4, 3), "Ouro Rosé": pos(5, 5) },
+          labelTamanho: "Comprimento",
+          tamanhos: ["45cm", "50cm"],
+          subtitulo: "Colar Medalhas Duplas — Plaquinhas gravadas com textura sutil",
+          descricao: "Corrente resistente com medalhas finas de acabamento acetinado."
+        },
+
+        // ================= PULSEIRAS (6 ITENS — COM FOTOS HD INDIVIDUAIS NOS 2 PRIMEIROS!) =================
+        {
+          id: 13,
           tituloCurto: "Pulseira Elo Imperial",
           nome: "Pulseira Elo Imperial | Sofisticação em cada elo",
           categoria: "Pulseira",
           precoAntigo: "R$ 279,00",
           precoAtual: 219.0,
-          imagem: "pulseira.jpeg",
+          imagens: {
+            "Ouro 18k": "imagens/pulseira-imperial-ouro.jpg",
+            "Ródio Branco": "imagens/pulseira-imperial-rodio.jpg",
+            "Ouro Rosé": "imagens/pulseira-imperial-rose.jpg"
+          },
           labelTamanho: "Tamanho",
           tamanhos: ["17cm", "19cm", "21cm"],
-          subtitulo: "Pulseira Elo Imperial — Leveza e resistência",
-          descricao:
-            "Elos articulados com fecho seguro e extensor ajustável. Ideal para usar sozinha ou em composições."
+          subtitulo: "Pulseira Elo Imperial — Leveza e presença",
+          descricao: "Elos entrelaçados de acabamento espelhado com fecho gaveta seguro."
         },
         {
-          id: 3,
-          tituloCurto: "Pingente Medalha Orgânica",
-          nome: "Pingente Medalha Orgânica | Design exclusivo",
-          categoria: "Pingente",
-          precoAntigo: "R$ 189,00",
-          precoAtual: 139.0,
-          imagem:
-            "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80",
-          labelTamanho: "Tamanho da Medalha",
-          tamanhos: ["Pequena (15mm)", "Média (20mm)"],
-          subtitulo: "Pingente Medalha Orgânica — Arte e significado",
-          descricao:
-            "Textura orgânica feita à mão no ateliê com banho de alta durabilidade e acabamento acetinado."
-        },
-        {
-          id: 4,
-          tituloCurto: "Anel Aparador Infinity",
-          nome: "Anel Aparador Infinity | Brilho contínuo",
-          categoria: "Anel",
-          precoAntigo: "R$ 199,00",
-          precoAtual: 149.0,
-          imagem: "aneis.jpeg",
-          labelTamanho: "Numeração do Aro",
-          tamanhos: ["14", "16", "18", "20", "22"],
-          subtitulo: "Anel Aparador Infinity — Versatilidade elegante",
-          descricao:
-            "Perfeito para acompanhar alianças ou usar sozinho. Cravação de alta precisão com banho de excelente resistência."
-        },
-        {
-          id: 5,
+          id: 14,
           tituloCurto: "Pulseira Riviera Clássica",
           nome: "Pulseira Riviera Clássica | Luxo em movimento",
           categoria: "Pulseira",
           precoAntigo: "R$ 349,00",
           precoAtual: 279.0,
-          imagem: "pulseira.jpeg",
+          imagens: {
+            "Ouro 18k": "imagens/pulseira-riviera-ouro.jpg",
+            "Ródio Branco": "imagens/pulseira-riviera-rodio.jpg",
+            "Ouro Rosé": "imagens/pulseira-riviera-rose.jpg"
+          },
           labelTamanho: "Tamanho",
           tamanhos: ["17cm", "18cm", "19cm"],
-          subtitulo: "Pulseira Riviera Clássica — Caimento impecável",
-          descricao:
-            "Fileira uniforme com brilho lapidado e trava dupla de segurança. Uma peça atemporal para eventos e dia a dia."
+          subtitulo: "Pulseira Riviera Clássica — Brilho contínuo e articulado",
+          descricao: "Cravação uniforme de zircônias lapidadas com trava dupla de segurança."
         },
         {
-          id: 6,
-          tituloCurto: "Colar Gravatinha Pérola",
-          nome: "Colar Gravatinha Pérola | Feminilidade refinada",
-          categoria: "Colar",
-          precoAntigo: "R$ 229,00",
-          precoAtual: 175.0,
-          imagem:
-            "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80",
-          labelTamanho: "Comprimento da Corrente",
-          tamanhos: ["45cm", "50cm", "55cm"],
-          subtitulo: "Colar Gravatinha Pérola — Charme sutil",
-          descricao:
-            "Caimento em Y que valoriza o colo com elegância. Banho nobre com acabamento suave ao toque."
+          id: 15,
+          tituloCurto: "Bracelete Rígido Orgânico",
+          nome: "Bracelete Rígido Orgânico | Escultura contemporânea",
+          categoria: "Pulseira",
+          precoAntigo: "R$ 329,00",
+          precoAtual: 259.0,
+          posicoes: { "Ouro 18k": pos(6, 3), "Ródio Branco": pos(1, 6), "Ouro Rosé": pos(2, 6) },
+          labelTamanho: "Tamanho",
+          tamanhos: ["P (58mm)", "M (62mm)"],
+          subtitulo: "Bracelete Rígido Orgânico — Design anatômico",
+          descricao: "Abertura lateral elegante e acabamento polido de alta resistência."
         },
         {
-          id: 7,
-          tituloCurto: "Pingente Relicário Coração",
-          nome: "Pingente Relicário Coração | Memórias eternizadas",
-          categoria: "Pingente",
+          id: 16,
+          tituloCurto: "Pulseira Pérolas Delicadas",
+          nome: "Pulseira Pérolas Delicadas | Romantismo moderno",
+          categoria: "Pulseira",
+          precoAntigo: "R$ 239,00",
+          precoAtual: 179.0,
+          posicoes: { "Ouro 18k": pos(4, 4), "Ródio Branco": pos(8, 4), "Ouro Rosé": pos(8, 4) },
+          labelTamanho: "Tamanho",
+          tamanhos: ["17cm + 3cm ext.", "19cm + 3cm ext."],
+          subtitulo: "Pulseira Pérolas Delicadas — Brilho nacarado",
+          descricao: "Combina pérolas selecionadas com acabamento hipoalergênico."
+        },
+        {
+          id: 17,
+          tituloCurto: "Bracelete Elos Esculpidos",
+          nome: "Bracelete Elos Esculpidos | Presença marcante",
+          categoria: "Pulseira",
+          precoAntigo: "R$ 299,00",
+          precoAtual: 235.0,
+          posicoes: { "Ouro 18k": pos(6, 4), "Ródio Branco": pos(7, 3), "Ouro Rosé": pos(2, 6) },
+          labelTamanho: "Tamanho",
+          tamanhos: ["P (58mm)", "M (62mm)"],
+          subtitulo: "Bracelete Elos Esculpidos — Textura em relevo",
+          descricao: "Peça estruturada que destaca o brilho metálico no pulso."
+        },
+        {
+          id: 18,
+          tituloCurto: "Pulseira Fio Delicado",
+          nome: "Pulseira Fio Delicado | Minimalismo versátil",
+          categoria: "Pulseira",
           precoAntigo: "R$ 219,00",
+          precoAtual: 165.0,
+          posicoes: { "Ouro 18k": pos(0, 6), "Ródio Branco": pos(7, 5), "Ouro Rosé": pos(8, 5) },
+          labelTamanho: "Tamanho",
+          tamanhos: ["18cm", "20cm"],
+          subtitulo: "Pulseira Fio Delicado — Ideal para mix de pulseiras",
+          descricao: "Elos finos que assentam suavemente sobre o pulso."
+        },
+
+        // ================= ANÉIS (6 ITENS) =================
+        {
+          id: 19,
+          tituloCurto: "Anel Solitário Atelier",
+          nome: "Anel Solitário Atelier | Acabamento de alta joalheria",
+          categoria: "Anel",
+          precoAntigo: "R$ 210,00",
+          precoAtual: 159.0,
+          posicoes: { "Ouro 18k": pos(6, 0), "Ródio Branco": pos(7, 0), "Ouro Rosé": pos(8, 5) },
+          labelTamanho: "Numeração do Aro",
+          tamanhos: ["14", "16", "18", "20", "22"],
+          subtitulo: "Anel Solitário Atelier — Clássico eterno",
+          descricao: "Cravação de quatro garras com pedra central luminosa e aro anatômico."
+        },
+        {
+          id: 20,
+          tituloCurto: "Anel Aparador Infinity",
+          nome: "Anel Aparador Infinity | Brilho contínuo",
+          categoria: "Anel",
+          precoAntigo: "R$ 199,00",
+          precoAtual: 149.0,
+          posicoes: { "Ouro 18k": pos(6, 2), "Ródio Branco": pos(5, 6), "Ouro Rosé": pos(8, 3) },
+          labelTamanho: "Numeração do Aro",
+          tamanhos: ["14", "16", "18", "20", "22"],
+          subtitulo: "Anel Aparador Infinity — Perfeito para composições",
+          descricao: "Aliança cravejada com acabamento confortável para uso diário."
+        },
+        {
+          id: 21,
+          tituloCurto: "Anel Liso Abaulado",
+          nome: "Anel Liso Abaulado | Design escultural minimalista",
+          categoria: "Anel",
+          precoAntigo: "R$ 225,00",
           precoAtual: 169.0,
-          imagem:
-            "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
-          labelTamanho: "Tamanho do Relicário",
-          tamanhos: ["Médio (18mm)", "Grande (24mm)"],
-          subtitulo: "Pingente Relicário Coração — Afeto em forma de joia",
-          descricao:
-            "Abre com delicadeza para guardar pequenas recordações. Fabricado com banho de alta qualidade."
+          posicoes: { "Ouro 18k": pos(6, 6), "Ródio Branco": pos(7, 6), "Ouro Rosé": pos(8, 1) },
+          labelTamanho: "Numeração do Aro",
+          tamanhos: ["14", "16", "18", "20"],
+          subtitulo: "Anel Liso Abaulado — Volume moderno e polimento espelhado",
+          descricao: "Superfície curva sem pedras que destaca a pureza do banho metálico."
+        },
+        {
+          id: 22,
+          tituloCurto: "Anel Baguete Cristal",
+          nome: "Anel Baguete Cristal | Lapidação geométrica",
+          categoria: "Anel",
+          precoAntigo: "R$ 249,00",
+          precoAtual: 189.0,
+          posicoes: { "Ouro 18k": pos(0, 7), "Ródio Branco": pos(1, 7), "Ouro Rosé": pos(2, 7) },
+          labelTamanho: "Numeração do Aro",
+          tamanhos: ["14", "16", "18", "20"],
+          subtitulo: "Anel Baguete Cristal — Sofisticação arquitetônica",
+          descricao: "Zircônia retangular central com brilho limpo e elegante."
+        },
+        {
+          id: 23,
+          tituloCurto: "Anel Ondas Entrelaçadas",
+          nome: "Anel Ondas Entrelaçadas | Movimento e leveza",
+          categoria: "Anel",
+          precoAntigo: "R$ 219,00",
+          precoAtual: 165.0,
+          posicoes: { "Ouro 18k": pos(4, 7), "Ródio Branco": pos(5, 7), "Ouro Rosé": pos(6, 7) },
+          labelTamanho: "Numeração do Aro",
+          tamanhos: ["14", "16", "18", "20", "22"],
+          subtitulo: "Anel Ondas Entrelaçadas — Curvas suaves e orgânicas",
+          descricao: "Aro com movimento fluido e polimento espelhado."
+        },
+        {
+          id: 24,
+          tituloCurto: "Anel Sinete Oval",
+          nome: "Anel Sinete Oval | Personalidade marcante",
+          categoria: "Anel",
+          precoAntigo: "R$ 259,00",
+          precoAtual: 195.0,
+          posicoes: { "Ouro 18k": pos(7, 7), "Ródio Branco": pos(7, 1), "Ouro Rosé": pos(8, 7) },
+          labelTamanho: "Numeração do Aro",
+          tamanhos: ["14", "16", "18", "20"],
+          subtitulo: "Anel Sinete Oval — Releitura contemporânea de um clássico",
+          descricao: "Mesa oval lisa com bordas suavizadas e banho de alta camada."
         }
       ];
 
+      let categoriaAtiva = "Todos";
       let produtoAtual = produtos[0];
+      let slideModalAtual = 0;
       let banhoAtual = "Ouro 18k";
       let tamanhoAtual = "";
       let quantidadeAtual = 1;
       let carrinho = [];
+      const slidesCards = {};
 
       function formatarMoeda(valor) {
         return valor.toLocaleString("pt-BR", {
@@ -432,17 +803,47 @@
         });
       }
 
+      // Gera o HTML de cada slide (imagem individual nítida ou fallback sprite)
+      function gerarHtmlSlide(prod, banho) {
+        if (prod.imagens && prod.imagens[banho]) {
+          return `<div class="carrossel-slide"><img src="${prod.imagens[banho]}" alt="${prod.tituloCurto} - ${banho}" loading="lazy" /></div>`;
+        }
+        const posicao = (prod.posicoes && prod.posicoes[banho]) || "0% 0%";
+        return `<div class="carrossel-slide"><div class="sprite-joia" style="background-position: ${posicao};"></div></div>`;
+      }
+
+      function moverSlideCard(event, prodId, delta) {
+        event.stopPropagation();
+        const atual = slidesCards[prodId] || 0;
+        const proximo = (atual + delta + 3) % 3;
+        irParaSlideCard(event, prodId, proximo);
+      }
+
+      function irParaSlideCard(event, prodId, indice) {
+        event.stopPropagation();
+        slidesCards[prodId] = indice;
+        const trilho = document.getElementById(`trilho-card-${prodId}`);
+        if (trilho) {
+          trilho.style.transform = `translateX(-${indice * 33.3333}%)`;
+        }
+        const dots = document.querySelectorAll(`#dots-card-${prodId} .carrossel-dot`);
+        dots.forEach((d, idx) => d.classList.toggle("ativo", idx === indice));
+      }
+
       function renderizarProdutos(lista) {
         const grid = document.getElementById("grid-produtos");
         const infoResultado = document.getElementById("resultado-pesquisa");
         const termo = document.getElementById("campo-pesquisa").value.trim();
 
-        if (termo === "") {
-          infoResultado.textContent = `Exibindo ${lista.length} peças disponíveis`;
+        if (termo === "" && categoriaAtiva === "Todos") {
+          infoResultado.textContent = `Exibindo todas as ${lista.length} peças do catálogo`;
         } else if (lista.length === 0) {
-          infoResultado.innerHTML = `Nenhuma peça encontrada para "<strong>${termo}</strong>". <button type="button" class="link-reset-busca" onclick="limparPesquisa()">Ver todas as peças</button>`;
+          infoResultado.innerHTML = `Nenhuma peça encontrada. <button type="button" class="link-reset-busca" onclick="limparPesquisa()">Mostrar todas as 24 peças</button>`;
         } else {
-          infoResultado.textContent = `${lista.length} ${lista.length === 1 ? "peça encontrada" : "peças encontradas"} para "${termo}"`;
+          const filtroLabel =
+            categoriaAtiva !== "Todos" ? ` em ${categoriaAtiva}s` : "";
+          const buscaLabel = termo !== "" ? ` para "${termo}"` : "";
+          infoResultado.textContent = `${lista.length} ${lista.length === 1 ? "peça encontrada" : "peças encontradas"}${filtroLabel}${buscaLabel}`;
         }
 
         if (lista.length === 0) {
@@ -451,29 +852,43 @@
         }
 
         grid.innerHTML = lista
-          .map(
-            (prod) => `
-          <div class="produto-card" onclick="abrirProduto(${prod.id})">
-            <div class="produto-img">
-              <span class="tag-banho">Promoção</span>
-              <img src="${prod.imagem}" alt="${prod.tituloCurto}" />
-            </div>
-            <div class="produto-detalhes">
-              <h3>${prod.tituloCurto}</h3>
-              <p class="preco-antigo">${prod.precoAntigo}</p>
-              <p class="preco">${formatarMoeda(prod.precoAtual)}</p>
-              <button type="button" class="btn-comprar">Escolher Opções</button>
-            </div>
-          </div>
-        `
-          )
+          .map((prod) => {
+            const slideAtivo = slidesCards[prod.id] || 0;
+            const slidesHtml = BANHOS_ORDEM.map((b) => gerarHtmlSlide(prod, b)).join("");
+
+            return `
+              <div class="produto-card" onclick="abrirProduto(${prod.id})">
+                <div class="produto-img">
+                  <span class="tag-banho">${prod.categoria}</span>
+                  <div class="carrossel-viewport">
+                    <button type="button" class="seta-carrossel seta-prev" onclick="moverSlideCard(event, ${prod.id}, -1)" aria-label="Anterior">‹</button>
+                    <div id="trilho-card-${prod.id}" class="carrossel-trilho" style="transform: translateX(-${slideAtivo * 33.3333}%);">
+                      ${slidesHtml}
+                    </div>
+                    <button type="button" class="seta-carrossel seta-next" onclick="moverSlideCard(event, ${prod.id}, 1)" aria-label="Próximo">›</button>
+                    <div id="dots-card-${prod.id}" class="carrossel-dots">
+                      <button type="button" class="carrossel-dot ${slideAtivo === 0 ? "ativo" : ""}" onclick="irParaSlideCard(event, ${prod.id}, 0)"></button>
+                      <button type="button" class="carrossel-dot ${slideAtivo === 1 ? "ativo" : ""}" onclick="irParaSlideCard(event, ${prod.id}, 1)"></button>
+                      <button type="button" class="carrossel-dot ${slideAtivo === 2 ? "ativo" : ""}" onclick="irParaSlideCard(event, ${prod.id}, 2)"></button>
+                    </div>
+                  </div>
+                </div>
+                <div class="produto-detalhes">
+                  <h3>${prod.tituloCurto}</h3>
+                  <p class="preco-antigo">${prod.precoAntigo}</p>
+                  <p class="preco">${formatarMoeda(prod.precoAtual)}</p>
+                  <button type="button" class="btn-comprar">Escolher Opções</button>
+                </div>
+              </div>
+            `;
+          })
           .join("");
       }
 
-      function filtrarProdutos() {
-        const termo = document
-          .getElementById("campo-pesquisa")
-          .value.toLowerCase()
+      function filtrarProdutos(rolarParaVitrine = false) {
+        const campo = document.getElementById("campo-pesquisa");
+        const termo = campo.value
+          .toLowerCase()
           .normalize("NFD")
           .replace(/[\u0300-\u036f]/g, "")
           .trim();
@@ -482,33 +897,82 @@
         btnLimpar.style.display = termo ? "flex" : "none";
 
         const filtrados = produtos.filter((prod) => {
+          const bateCategoria =
+            categoriaAtiva === "Todos" || prod.categoria === categoriaAtiva;
+
           const textoBusca = `${prod.tituloCurto} ${prod.nome} ${prod.categoria} ${prod.descricao}`
             .toLowerCase()
             .normalize("NFD")
             .replace(/[\u0300-\u036f]/g, "");
-          return textoBusca.includes(termo);
+
+          return bateCategoria && textoBusca.includes(termo);
         });
 
         renderizarProdutos(filtrados);
+
+        if (rolarParaVitrine && termo.length >= 2) {
+          const secao = document.getElementById("destaques");
+          const rect = secao.getBoundingClientRect();
+          if (rect.top > window.innerHeight * 0.6) {
+            secao.scrollIntoView({ behavior: "smooth" });
+          }
+        }
+      }
+
+      function selecionarCategoria(categoria) {
+        categoriaAtiva = categoria;
+
+        document.querySelectorAll(".aba-btn").forEach((btn) => {
+          btn.classList.remove("ativo");
+          if (
+            (categoria === "Todos" && btn.textContent.includes("Todos")) ||
+            btn.textContent.includes(categoria)
+          ) {
+            btn.classList.add("ativo");
+          }
+        });
+
+        filtrarProdutos(false);
       }
 
       function limparPesquisa() {
         document.getElementById("campo-pesquisa").value = "";
-        filtrarProdutos();
+        selecionarCategoria("Todos");
       }
 
-      function buscarPorCategoria(categoria) {
-        const campo = document.getElementById("campo-pesquisa");
-        campo.value = categoria;
-        filtrarProdutos();
+      function irParaSlideModal(indice) {
+        slideModalAtual = indice;
+        banhoAtual = BANHOS_ORDEM[indice];
+
+        const trilho = document.getElementById("modal-trilho");
+        trilho.style.transform = `translateX(-${indice * 33.3333}%)`;
+
+        document.getElementById("banho-selecionado").textContent = banhoAtual;
+
+        document.querySelectorAll(".cor-bolinha").forEach((b, i) => {
+          b.classList.toggle("ativo", i === indice);
+        });
+
+        document.querySelectorAll("#modal-dots .carrossel-dot").forEach((d, i) => {
+          d.classList.toggle("ativo", i === indice);
+        });
       }
 
-      function abrirProduto(indice) {
-        produtoAtual = produtos.find((p) => p.id === indice) || produtos[0];
+      function moverSlideModal(delta) {
+        const proximo = (slideModalAtual + delta + 3) % 3;
+        irParaSlideModal(proximo);
+      }
+
+      function abrirProduto(id) {
+        produtoAtual = produtos.find((p) => p.id === id) || produtos[0];
         quantidadeAtual = 1;
-        banhoAtual = "Ouro 18k";
+        const indiceInicial = slidesCards[id] || 0;
 
-        document.getElementById("modal-img").src = produtoAtual.imagem;
+        const trilhoModal = document.getElementById("modal-trilho");
+        trilhoModal.innerHTML = BANHOS_ORDEM.map((b) =>
+          gerarHtmlSlide(produtoAtual, b)
+        ).join("");
+
         document.getElementById("modal-titulo").textContent = produtoAtual.nome;
         document.getElementById("modal-preco-antigo").textContent =
           produtoAtual.precoAntigo;
@@ -520,10 +984,7 @@
         document.getElementById("modal-texto-desc").textContent =
           produtoAtual.descricao;
 
-        document.getElementById("banho-selecionado").textContent = banhoAtual;
-        document.querySelectorAll(".cor-bolinha").forEach((b, i) => {
-          b.classList.toggle("ativo", i === 0);
-        });
+        irParaSlideModal(indiceInicial);
 
         document.getElementById("label-tamanho").textContent =
           produtoAtual.labelTamanho;
@@ -556,12 +1017,8 @@
       }
 
       function selecionarBanho(botao) {
-        document
-          .querySelectorAll(".cor-bolinha")
-          .forEach((b) => b.classList.remove("ativo"));
-        botao.classList.add("ativo");
-        banhoAtual = botao.dataset.nome;
-        document.getElementById("banho-selecionado").textContent = banhoAtual;
+        const indice = Number(botao.dataset.indice) || 0;
+        irParaSlideModal(indice);
       }
 
       function selecionarTamanho(botao, valor) {
@@ -598,7 +1055,8 @@
           tamanho: tamanhoAtual,
           quantidade: quantidadeAtual,
           precoUnitario: produtoAtual.precoAtual,
-          imagem: produtoAtual.imagem
+          imagem: produtoAtual.imagens ? produtoAtual.imagens[banhoAtual] : null,
+          posicao: produtoAtual.posicoes ? produtoAtual.posicoes[banhoAtual] : "0% 0%"
         });
 
         atualizarCarrinhoUI();
@@ -632,9 +1090,13 @@
           const subtotal = item.precoUnitario * item.quantidade;
           soma += subtotal;
 
+          const thumbHtml = item.imagem
+            ? `<img src="${item.imagem}" alt="${item.nome}" />`
+            : `<div class="sprite-joia" style="width:64px; height:64px; border-radius:4px; flex-shrink:0; background-position: ${item.posicao};"></div>`;
+
           lista.innerHTML += `
             <div class="item-sacola">
-              <img src="${item.imagem}" alt="${item.nome}" />
+              ${thumbHtml}
               <div class="item-sacola-info">
                 <h4>${item.nome}</h4>
                 <p>Banho: ${item.banho} • Tam: ${item.tamanho}</p>
@@ -676,7 +1138,6 @@
         window.open(url, "_blank");
       }
 
-      // Renderiza todas as 8 peças ao carregar a página
       renderizarProdutos(produtos);
     </script>
   </body>
